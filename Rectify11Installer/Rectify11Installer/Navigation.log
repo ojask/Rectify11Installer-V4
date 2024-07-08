@@ -1,0 +1,472 @@
+
+
+================ Logging started at Tue Jul  2 16:54:21 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+
+================ Logging started at Tue Jul  2 19:10:20 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 3
+hiding page 2
+setting animator2 width to 0
+unhiding page 3
+setting animator3 width to 50. Animation plays.
+Setting progress bar width to 90
+TaskAtArrival() called at page 3
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 3
+Starting Navigation from page 3 to 4
+hiding page 3
+setting animator3 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 150
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 225
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+
+================ Logging started at Tue Jul  2 23:22:43 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+
+================ Logging started at Tue Jul  2 23:23:02 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 3
+hiding page 2
+setting animator2 width to 0
+unhiding page 3
+setting animator3 width to 50. Animation plays.
+Setting progress bar width to 90
+TaskAtArrival() called at page 3
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 3
+Starting Navigation from page 3 to 4
+hiding page 3
+setting animator3 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 150
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 3
+hiding page 4
+setting animator4 width to 0
+unhiding page 3
+setting animator3 width to 50. Animation plays.
+Setting progress bar width to 90
+TaskAtArrival() called at page 3
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 3
+Starting Navigation from page 3 to 2
+hiding page 3
+setting animator3 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 1
+hiding page 2
+setting animator2 width to 0
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+
+================ Logging started at Tue Jul  2 23:27:59 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 4
+hiding page 2
+setting animator2 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+
+================ Logging started at Tue Jul  2 23:29:44 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 3
+hiding page 2
+setting animator2 width to 0
+unhiding page 3
+setting animator3 width to 50. Animation plays.
+Setting progress bar width to 90
+TaskAtArrival() called at page 3
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 3
+Starting Navigation from page 3 to 4
+hiding page 3
+setting animator3 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 150
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+
+================ Logging started at Tue Jul  2 23:31:58 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 4
+hiding page 2
+setting animator2 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+
+================ Logging started at Tue Jul  2 23:40:34 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 4
+hiding page 2
+setting animator2 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 180
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 5
+Starting Navigation from page 5 to 4
+hiding page 5
+setting animator5 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 180
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 5
+Starting Navigation from page 5 to 4
+hiding page 5
+setting animator5 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 180
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 5
+Starting Navigation from page 5 to 6
+hiding page 5
+setting animator5 width to 0
+unhiding page 6
+setting animator6 width to 50. Animation plays.
+Setting progress bar width to 270
+TaskAtArrival() called at page 6
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+Hiding Back button
+Hiding next button
+Starting Main Loading Animation
+Starting Installation
+
+Installation log can be found in the file Installation.log
+
+
+
+================ Logging started at Mon Jul  8 07:20:18 2024 ================
+
+
+TaskAtLeave() called at page 0
+Starting Navigation from page 0 to 1
+unhiding page 1
+setting animator1 width to 50. Animation plays.
+Setting progress bar width to 15
+TaskAtArrival() called at page 1
+Changing back button content string to 'Exit'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 1
+Starting Navigation from page 1 to 2
+hiding page 1
+setting animator1 width to 0
+unhiding page 2
+setting animator2 width to 50. Animation plays.
+Setting progress bar width to 45
+TaskAtArrival() called at page 2
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 2
+Starting Navigation from page 2 to 4
+hiding page 2
+setting animator2 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 180
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 5
+Starting Navigation from page 5 to 4
+hiding page 5
+setting animator5 width to 0
+unhiding page 4
+setting animator4 width to 50. Animation plays.
+Setting progress bar width to 105
+TaskAtArrival() called at page 4
+Changing back button content string to 'Back'
+Changing next button layoutpos to -3
+
+TaskAtLeave() called at page 4
+Starting Navigation from page 4 to 5
+hiding page 4
+setting animator4 width to 0
+unhiding page 5
+setting animator5 width to 50. Animation plays.
+Setting progress bar width to 180
+TaskAtArrival() called at page 5
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+
+TaskAtLeave() called at page 5
+Starting Navigation from page 5 to 6
+hiding page 5
+setting animator5 width to 0
+unhiding page 6
+setting animator6 width to 50. Animation plays.
+Setting progress bar width to 270
+TaskAtArrival() called at page 6
+Changing back button content string to 'Back'
+Changing next button layoutpos to 0
+Hiding Back button
+Hiding next button
+Starting Main Loading Animation
+Starting Installation
+
+Installation log can be found in the file Installation.log
+

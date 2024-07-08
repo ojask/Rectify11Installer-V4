@@ -1,0 +1,20 @@
+<duixml>
+	<Element resid="PageMain" layoutpos="client" layout="borderlayout()" background="argb(0,0,0,0)">
+		<Element id="atom(animator7)" class="animator" layoutpos="left"/>
+		<Element layout="borderlayout()" class="page" padding="rect(-50rp,0,0,0)" layoutpos="left">
+			<Element layout="flowlayout(0,2,2,0)" padding="rect(60rp,10rp,60rp,0)" layoutpos="left">
+				<Element class="IPImage" width="250rp" height="250rp"/>
+			</Element>
+			<Element layout="borderlayout()" layoutpos="left">
+				<Richtext class="headertext" layoutpos="top" content="Restarting..."/>
+				<Richtext class="instructiontext" layoutpos="top" content="A restart is required in order for changes to take place. Save all your work, your PC will restart automatically."/>
+				<Element layout="verticalflowlayout()" padding="rect(3rp,15rp,0,0)" layoutpos="top">
+					<Element layout="borderlayout()">
+						<Richtext id="atom(RestartWaitAnimation)" layoutpos="left" contentalign="middlecenter" font="14pt;normal;None;Segoe UI Semilight" height="30rp" width="30rp"/>
+						<Richtext id="atom(RestartCountdown)" layoutpos="left" contentalign="middlecenter" padding="rect(5rp,0,0,0)" content="Restarting in: 30 seconds"/>
+					</Element>
+				</Element>
+			</Element>
+		</Element>
+	</Element>
+</duixml>

@@ -1,0 +1,14 @@
+
+
+Beginning Rectify11 initialization at Tue Jul  2 08:43:41 2024
+
+InitProcessPriv() exited with code 0
+InitThread() exited with code 0
+RegisterAllControls() exited with code 0
+NativeHWNDHost::Create() exited with code 0
+DUIXmlParser::Create() exited with code 0
+NativeHWNDHost::Create() exited with code 1
+HWNDElement::Create() exited with code 0
+pParser->CreateElement() exited with code 0
+InitInstaller() exited with code 0
+Installer Initialised successfully.

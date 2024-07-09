@@ -223,7 +223,6 @@
     <None Include="Base.dll">
       <Filter>Resource Files\Dll</Filter>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="segoe_r11.ttf">

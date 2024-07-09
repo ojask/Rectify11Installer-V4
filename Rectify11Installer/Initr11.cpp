@@ -21,6 +21,7 @@ bool CheckVer(int build) {
     return true;
 }
 
+
 bool GetUserAppMode() {
     int i;
     auto buffer = std::vector<char>(4);

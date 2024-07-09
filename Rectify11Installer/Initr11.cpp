@@ -25,12 +25,12 @@ bool GetUserAppMode() {
     int i;
     auto buffer = std::vector<char>(4);
     auto cbData = static_cast<DWORD>(buffer.size() * sizeof(char));
-    auto res = RegGetValueW(
+    auto res = RegGetValue(
         HKEY_CURRENT_USER,
         L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
         L"AppsUseLightTheme",
         RRF_RT_REG_DWORD,
-        nullptr,
+        NULL,
         buffer.data(),
         &cbData);
     if (res != ERROR_SUCCESS) {

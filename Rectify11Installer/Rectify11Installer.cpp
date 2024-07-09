@@ -1,12 +1,8 @@
 // Rectify11Installer.cpp : Defines the entry point for the application.
 //
-#include "Rectify11Installer.h"
 #include "framework.h"
+#include "Rectify11Installer.h"
 #include "resource.h"
-#include <vector>
-#include <string>
-#include <dwmapi.h>
-#include <winerror.h>
 
 #include "DirectUI/DirectUI.h"
 

@@ -15,13 +15,8 @@ enum InstallType {
 #ifndef MY_HEADER_H
 #define MY_HEADER_H
 
-#include <atomic>
-#include <thread>
-#include <chrono>
-#include <string>
-#include <fstream>
+#include "framework.h"
 using namespace std;
-
 
 void GetInstallInfo(PatchType pTypeW, InstallType iTypeW);
 

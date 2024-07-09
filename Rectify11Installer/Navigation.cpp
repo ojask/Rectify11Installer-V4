@@ -1,7 +1,6 @@
-#include "Navigation.h"
 #include "framework.h"
+#include "Navigation.h"
 #include "InstallerEngine.h"
-#include <vector>
 #include "DirectUI/DirectUI.h"
 
 using namespace std;

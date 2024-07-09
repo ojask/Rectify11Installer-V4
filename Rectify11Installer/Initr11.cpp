@@ -1,11 +1,8 @@
+#include "framework.h"
 #include "Initr11.h"
 #include "Rectify11Installer.h"
-#include "framework.h"
 #include "Navigation.h"
 #include "resource.h"
-#include <winerror.h>
-#include <string>
-#include <vector>
 #include "DirectUI/DirectUI.h"
 
 using namespace std;

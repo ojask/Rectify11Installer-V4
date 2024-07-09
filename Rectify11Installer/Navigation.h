@@ -3,9 +3,9 @@
 #ifndef MY_HEADERNAV_H
 #define MY_HEADERNAV_H
 
+#include "framework.h"
 #include "InstallerEngine.h"
 #include "Logger.h"
-#include <vector>
 #include "DirectUI/DirectUI.h"
 
 using namespace std;

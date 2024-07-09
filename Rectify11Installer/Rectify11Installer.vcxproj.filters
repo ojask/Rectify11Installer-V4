@@ -16,6 +16,12 @@
     <Filter Include="Header Files\DirectUI">
       <UniqueIdentifier>{9a053691-68f0-40eb-aa55-5ade6534548c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Pages">
+      <UniqueIdentifier>{f05663d5-708a-4416-96b5-7155d2b6d168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Dll">
+      <UniqueIdentifier>{5b24bb57-0164-4f68-b930-f19b9c56f849}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -179,24 +185,48 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="uifile.xml" />
-    <Xml Include="Pages\1.xml" />
-    <Xml Include="Pages\2.xml" />
-    <Xml Include="Pages\3.xml" />
-    <Xml Include="Pages\4.xml" />
-    <Xml Include="Pages\5.xml" />
-    <Xml Include="Pages\6.xml" />
-    <Xml Include="Pages\7.xml" />
+    <Xml Include="Pages\1.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\2.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\3.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\4.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\5.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\6.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\7.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="uifile.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Base.dll" />
-    <None Include="Controls.dll" />
-    <None Include="PageRes.dll" />
+    <None Include="PageRes.dll">
+      <Filter>Resource Files\Dll</Filter>
+    </None>
+    <None Include="Controls.dll">
+      <Filter>Resource Files\Dll</Filter>
+    </None>
+    <None Include="Base.dll">
+      <Filter>Resource Files\Dll</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="segoe_r11.ttf" />
+    <Font Include="segoe_r11.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

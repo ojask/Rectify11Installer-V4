@@ -3,8 +3,7 @@
 #ifndef MY_HEADERLOGGER_H
 #define MY_HEADERLOGGER_H
 
-#include <fstream>
-#include <string>
+#include "framework.h"
 using namespace std;
 class Logger {
 private:

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34902.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rectify11Installer", "Rectify11Installer\Rectify11Installer.vcxproj", "{E1E56D3B-A7CF-4068-9BA9-279570E7E081}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Debug|x64.ActiveCfg = Debug|x64
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Debug|x64.Build.0 = Debug|x64
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Debug|x86.ActiveCfg = Debug|Win32
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Debug|x86.Build.0 = Debug|Win32
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Release|x64.ActiveCfg = Release|x64
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Release|x64.Build.0 = Release|x64
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Release|x86.ActiveCfg = Release|Win32
+		{E1E56D3B-A7CF-4068-9BA9-279570E7E081}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C77CDFD-F8DD-409B-AE22-EBD6540D89E3}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,28 @@
+<duixml>
+	<Element resid="PageMain" layoutpos="client" layout="borderlayout()" background="argb(0,0,0,0)">
+		<Element id="atom(animator2)" class="animator" layoutpos="left"/>
+		<Element layout="borderlayout()" class="page" padding="rect(-50rp,0,0,0)" layoutpos="left">
+			<Element layout="flowlayout(0,2,2,0)" padding="rect(75rp,10rp,45rp,0)" layoutpos="left">
+				<Element class="PTImage" width="250rp" height="250rp"/>
+			</Element>
+			<Element layout="borderlayout()" layoutpos="left">
+				<Richtext class="headertext" layoutpos="top" content="Select Patching Mode"/>
+				<Richtext class="instructiontext" layoutpos="top" content="You can either patch your system, or patch a Windows 11 ISO file for a more complete experience."/>
+				<Element layout="verticalflowlayout()" padding="rect(3rp,15rp,0,0)" layoutpos="top">
+					<TouchButton id="atom(PatchSystem)" class="CommandLink" layout="borderlayout()" margin="rect(0,0,0,5rp)">
+						<Richtext class="CommandLinkIcon" layoutpos="left" content="resstr(105)"/>
+						<Richtext class="CommandLinkArrow" layoutpos="right"/>
+						<RichText class="CommandLinkHeader" layoutpos="top" content="Patch your system"/>
+						<RichText class="CommandLinkInstruction" layoutpos="top" content="Proceed to install Rectify11 on your PC"/>
+					</TouchButton>
+					<TouchButton id="atom(PatchISO)" class="CommandLink" layout="borderlayout()" margin="rect(0,0,0,5rp)">
+						<Richtext class="CommandLinkIcon" layoutpos="left" content="resstr(106)"/>
+						<Richtext class="CommandLinkArrow" layoutpos="right"/>
+						<RichText class="CommandLinkHeader" layoutpos="top" content="Patch an ISO file"/>
+						<RichText class="CommandLinkInstruction" layoutpos="top" content="Install Rectify11 on a Windows 11 ISO file"/>
+					</TouchButton>
+				</Element>
+			</Element>
+		</Element>
+	</Element>
+</duixml>

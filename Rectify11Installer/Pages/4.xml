@@ -1,0 +1,34 @@
+<duixml>
+	<Element resid="PageMain" layoutpos="client" layout="borderlayout()" background="argb(0,0,0,0)">
+		<Element id="atom(animator4)" class="animator" layoutpos="left"/>
+		<Element layout="borderlayout()" class="page" padding="rect(-50rp,0,0,0)" layoutpos="left">
+			<Element layout="flowlayout(0,2,2,0)" padding="rect(60rp,10rp,60rp,0)" layoutpos="left">
+				<Element class="ITImage" width="250rp" height="250rp"/>
+			</Element>
+			<Element layout="borderlayout()" layoutpos="left">
+				<Richtext class="headertext" layoutpos="top" content="Select Installation Type"/>
+				<Richtext class="instructiontext" layoutpos="top" content="Express, Full, and Custom installations are available, results will vary accordingly."/>
+				<Element layout="verticalflowlayout()" padding="rect(3rp,15rp,0,0)" layoutpos="top">
+					<TouchButton id="atom(Express)" class="CommandLink" layout="borderlayout()" margin="rect(0,0,0,5rp)">
+						<Richtext class="CommandLinkIcon" layoutpos="left" content="resstr(107)"/>
+						<Richtext class="CommandLinkArrow" layoutpos="right"/>
+						<RichText class="CommandLinkHeader" layoutpos="top" content="Express"/>
+						<RichText class="CommandLinkInstruction" layoutpos="top" content="Patch common icons, preserves anti-cheat"/>
+					</TouchButton>
+					<TouchButton id="atom(Full)" class="CommandLink" layout="borderlayout()" margin="rect(0,0,0,5rp)">
+						<Richtext class="CommandLinkIcon" layoutpos="left" content="resstr(110)"/>
+						<Richtext class="CommandLinkArrow" layoutpos="right"/>
+						<RichText class="CommandLinkHeader" layoutpos="top" content="Full"/>
+						<RichText class="CommandLinkInstruction" layoutpos="top" content="More inclusive, breaks anti-cheat"/>
+					</TouchButton>
+					<TouchButton id="atom(None)" class="CommandLink" layout="borderlayout()" margin="rect(0,0,0,5rp)">
+						<Richtext class="CommandLinkIcon" layoutpos="left" content="resstr(111)"/>
+						<Richtext class="CommandLinkArrow" layoutpos="right"/>
+						<RichText class="CommandLinkHeader" layoutpos="top" content="None"/>
+						<RichText class="CommandLinkInstruction" layoutpos="top" content="No files are patched"/>
+					</TouchButton>
+				</Element>
+			</Element>
+		</Element>
+	</Element>
+</duixml>

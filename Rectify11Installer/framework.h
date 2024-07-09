@@ -11,16 +11,15 @@
 #include <dwmapi.h>
 #include <winerror.h>
 
-// C RunTime Header Files
-#include <vector>
+// C++ RunTime Header Files
 #include <atomic>
-#include <thread>
 #include <chrono>
-#include <string>
+#include <codecvt>
 #include <fstream>
 #include <locale>
-#include <codecvt>
-
+#include <string>
+#include <thread>
+#include <vector>
 
 #define DEFENDERPAGE               1
 #define PATCHSELECTPAGE            2

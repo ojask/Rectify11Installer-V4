@@ -23,25 +23,22 @@ bool CheckVer(int build) {
 
 
 bool GetUserAppMode() {
-    int i;
-    auto buffer = std::vector<char>(4);
-    auto cbData = static_cast<DWORD>(buffer.size() * sizeof(char));
-    auto res = RegGetValue(
-        HKEY_CURRENT_USER,
-        L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-        L"AppsUseLightTheme",
-        RRF_RT_REG_DWORD,
-        NULL,
-        buffer.data(),
-        &cbData);
-    if (res != ERROR_SUCCESS) {
-        i = 1;
-    }
-    else {
-        i = int(buffer[3] << 24 |
-            buffer[2] << 16 |
-            buffer[1] << 8 |
-            buffer[0]);
+    int i = 0;
+    LPCWSTR path = L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize";
+    HKEY hKey;
+    DWORD lResult = RegOpenKeyEx(HKEY_CURRENT_USER, path, 0, KEY_READ, &hKey);
+    if (lResult == ERROR_SUCCESS)
+    {
+        DWORD dwSize = NULL;
+        lResult = RegGetValue(hKey, NULL, L"AppsUseLightTheme", RRF_RT_DWORD, NULL, NULL, &dwSize);
+        if (lResult == ERROR_SUCCESS && dwSize != NULL)
+        {
+            DWORD* dwValue = (DWORD*)malloc(dwSize);
+            lResult = RegGetValue(hKey, NULL, L"AppsUseLightTheme", RRF_RT_DWORD, NULL, dwValue, &dwSize);
+            i = *dwValue;
+            free(dwValue);
+        }
+        RegCloseKey(hKey);
     }
     if (i == 1) return true;
     return false;
@@ -188,7 +185,7 @@ int ChangeSheet() {
 int InitInstaller() {
     if (!CheckVer(21343)) {
         err = -21343;
-        MessageBox(NULL, L"unsupported", L"no", MB_ICONERROR);
+        TaskDialog(NULL, NULL, L"no", L"compatibility error", L"no", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"This Windows Build is not support. Windows 10 Build 21343 and above is required.", err);
         return err;
     }

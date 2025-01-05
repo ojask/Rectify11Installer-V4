@@ -202,6 +202,8 @@
     <ClInclude Include="DirectUI\types.h" />
     <ClInclude Include="DirectUI\Value.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="InitUninst.h" />
+    <ClInclude Include="InstallationProcedure.h" />
     <ClInclude Include="Initr11.h" />
     <ClInclude Include="InstallerEngine.h" />
     <ClInclude Include="Logger.h" />
@@ -209,13 +211,17 @@
     <ClInclude Include="Rectify11Installer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UninstallationProcedure.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InitUninst.cpp" />
+    <ClCompile Include="InstallationProcedure.cpp" />
     <ClCompile Include="Initr11.cpp" />
     <ClCompile Include="InstallerEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Rectify11Installer.cpp" />
+    <ClCompile Include="UninstallationProcedure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Rectify11Installer.rc" />
@@ -226,12 +232,15 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Pages\1.xml" />
+    <Xml Include="Pages\10.xml" />
     <Xml Include="Pages\2.xml" />
     <Xml Include="Pages\3.xml" />
     <Xml Include="Pages\4.xml" />
     <Xml Include="Pages\5.xml" />
     <Xml Include="Pages\6.xml" />
     <Xml Include="Pages\7.xml" />
+    <Xml Include="Pages\8.xml" />
+    <Xml Include="Pages\9.xml" />
     <Xml Include="uifile.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +255,12 @@
     </None>
     <None Include="PageRes.dll">
       <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Rectify11\7za.exe">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </None>
+    <None Include="Rectify11\Files.7z">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
     </None>
   </ItemGroup>
   <ItemGroup>

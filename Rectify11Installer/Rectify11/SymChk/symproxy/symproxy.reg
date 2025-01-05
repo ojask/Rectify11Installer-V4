@@ -1,0 +1,29 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy]
+"Available Settings"="Remove the 'x' prefix to use the setting"
+"xMissAgeTimeout"=dword:00015180
+"xMissAgeCheck"=dword:00000e10
+"xMissTimeout"=dword:00000e10
+"xNoCache"=dword:00000001
+"xNoFilePointers"=dword:00000001
+"xNoInternetProxy"=dword:00000001
+"xNoLongerIndexedAuthoritive"=dword:00000001
+"xNoUncompress"=dword:00000001
+"xRequestTimeout"=dword:0000019
+"xRetryAppHang"=dword:0000002
+"xUriFilter"=dword:00000FF
+"xUriTiers"=dword:0000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy\Web Directories]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy\Web Directories\Symbols]
+"SymbolPath"="http://msdl.microsoft.com/download/symbols"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application\Microsoft-Windows-SymProxy]
+"ProviderGuid"="{0876099c-a903-47ff-af14-52035bb479ef}"
+"EventMessageFile"=hex(2):25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,\
+  00,6f,00,74,00,25,00,5c,00,73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,\
+  5c,00,69,00,6e,00,65,00,74,00,73,00,72,00,76,00,5c,00,53,00,79,00,6d,00,50,\
+  00,72,00,6f,00,78,00,79,00,2e,00,64,00,6c,00,6c,00,00,00
+"TypesSupported"=dword:00000007

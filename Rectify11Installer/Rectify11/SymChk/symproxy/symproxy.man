@@ -1,0 +1,962 @@
+﻿<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    >
+  <instrumentation>
+    <!-- Instrumentation Events -->
+    <events>
+      <!-- Event Provider -->
+      <provider
+          guid="{0876099c-a903-47ff-af14-52035bb479ef}"
+          message="$(string.EventProviderName)"
+          messageFileName="%SystemRoot%\system32\inetsrv\SymProxy.dll"
+          name="Microsoft-Windows-SymProxy"
+          resourceFileName="%SystemRoot%\system32\inetsrv\SymProxy.dll"
+          symbol="Events"
+          >
+        <!-- Channels -->
+        <channels>
+          <channel
+              chid="SymbolProxy_Admin_Channel"
+              enabled="true"
+              message="$(string.AdminChannelName)"
+              name="Microsoft-Windows-SymProxy/Admin"
+              symbol="SymbolProxy_Admin_Channel"
+              type="Admin"
+              />
+          <channel
+              chid="SymbolProxy_Operational_Channel"
+              enabled="true"
+              message="$(string.OperationalChannelName)"
+              name="Microsoft-Windows-SymProxy/Operational"
+              symbol="SymbolProxy_Operational_Channel"
+              type="Operational"
+              />
+          <channel
+              chid="SymbolProxy_Analytic_Channel"
+              enabled="false"
+              message="$(string.AnalyticChannelName)"
+              name="Microsoft-Windows-SymProxy/Analytic"
+              symbol="SymbolProxy_Analytic_Channel"
+              type="Analytic"
+              />
+          <channel
+              chid="SymbolProxy_Debug_Channel"
+              enabled="false"
+              message="$(string.DebugChannelName)"
+              name="Microsoft-Windows-SymProxy/Debug"
+              symbol="SymbolProxy_Debug_Channel"
+              type="Analytic"
+              />
+        </channels>
+        <!-- Templates -->
+        <templates>
+          <!-- Start / Stop -->
+          <template tid="SymbolProxy_StartStopTemplate"/>
+          <!-- Configuration -->
+          <template tid="SymbolProxy_ConfigTemplate">
+            <data
+                inType="win:AnsiString"
+                name="Configuration"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <Configuration>%1</Configuration>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- Configuration -->
+          <template tid="SymbolProxy_StatisticsTemplate">
+            <data
+                inType="win:AnsiString"
+                name="Statistics"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <Statistics>%1</Statistics>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- URL Map -->
+          <template tid="SymbolProxy_URLMapTemplate">
+            <data
+                inType="win:AnsiString"
+                name="PhysicalPath"
+                />
+            <data
+                inType="win:AnsiString"
+                name="RequestURL"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <PhysicalPath>%1</PhysicalPath>
+                <RequestURL>%2</RequestURL>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- SymSrv Duration -->
+          <template tid="SymbolProxy_SymSrvDurationTemplate">
+            <data
+                inType="win:AnsiString"
+                name="PhysicalPath"
+                />
+            <data
+                inType="win:AnsiString"
+                name="RequestURL"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Store"
+                />
+            <data
+                inType="win:UInt32"
+                name="ErrorCode"
+                />
+            <data
+                inType="win:UInt64"
+                name="Milliseconds"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <PhysicalPath>%1</PhysicalPath>
+                <RequestURL>%2</RequestURL>
+                <Store>%3</Store>
+                <IndexPath>%4</IndexPath>
+                <ErrorCode>%5</ErrorCode>
+                <Milliseconds>%6</Milliseconds>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- SymSrv Download -->
+          <template tid="SymbolProxy_SymSrvDownloadTemplate">
+            <data
+                inType="win:AnsiString"
+                name="PhysicalPath"
+                />
+            <data
+                inType="win:AnsiString"
+                name="RequestURL"
+                />
+            <data
+                inType="win:UInt64"
+                name="Size"
+                />
+            <data
+                inType="win:UInt64"
+                name="Milliseconds"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <PhysicalPath>%1</PhysicalPath>
+                <RequestURL>%2</RequestURL>
+                <Size>%3</Size>
+                <Milliseconds>%4</Milliseconds>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- SymSrv Error -->
+          <template tid="SymbolProxy_SymSrvErrorTemplate">
+            <data
+                inType="win:UInt32"
+                name="ErrorCode"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Path"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Store"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <ErrorCode>%1</ErrorCode>
+                <Path>%2</Path>
+                <Store>%3</Store>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- SymSrv Critical Symbol -->
+          <template tid="SymbolProxy_SymSrvCriticalSymbolTemplate">
+            <data
+                inType="win:AnsiString"
+                name="RequestURL"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Store"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Response"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <URL>%1</URL>
+                <Store>%2</Store>
+                <Response>%3</Response>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- SymSrv Critical Symbol -->
+          <template tid="SymbolProxy_SymSrvCriticalImageTemplate">
+            <data
+                inType="win:AnsiString"
+                name="RequestURL"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Store"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Response"
+                />
+            <data
+                inType="win:AnsiString"
+                name="Timestamp"
+                />
+            <data
+                inType="win:AnsiString"
+                name="CRLF"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <URL>%1</URL>
+                <Store>%2</Store>
+                <Response>%3</Response>
+                <Timestamp>%4</Timestamp>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- Lock Contention -->
+          <template tid="SymbolProxy_LockContentionTemplate">
+            <data
+                inType="win:AnsiString"
+                name="Lock"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <Lock>%1</Lock>
+              </EventXML>
+            </UserData>
+          </template>
+          <!-- Generic Strings -->
+          <template tid="SymbolProxy_AnsiStringTemplate">
+            <data
+                inType="win:AnsiString"
+                name="LogString"
+                />
+            <UserData>
+              <EventXML xmlns="Event_NS">
+                <LogString>%1</LogString>
+              </EventXML>
+            </UserData>
+          </template>
+        </templates>
+        <!-- Events -->
+        <events>
+          <!-- Start / Stop -->
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Informational"
+              message="$(string.StartEvent)"
+              opcode="win:Start"
+              symbol="SymbolProxy_Start_Event"
+              template="SymbolProxy_StartStopTemplate"
+              value="1"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Informational"
+              message="$(string.StopEvent)"
+              opcode="win:Stop"
+              symbol="SymbolProxy_Stop_Event"
+              template="SymbolProxy_StartStopTemplate"
+              value="2"
+              />
+          <!-- Configuration -->
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Informational"
+              message="$(string.ConfigEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Config_Event"
+              template="SymbolProxy_ConfigTemplate"
+              value="3"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Informational"
+              message="$(string.StatisticsEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Statistics_Event"
+              template="SymbolProxy_StatisticsTemplate"
+              value="4"
+              />
+          <!-- URL Map -->
+          <event
+              channel="SymbolProxy_Operational_Channel"
+              level="win:Informational"
+              message="$(string.URLMapHitEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_URLMap_Hit_Event"
+              template="SymbolProxy_URLMapTemplate"
+              value="10"
+              />
+          <event
+              channel="SymbolProxy_Operational_Channel"
+              level="win:Informational"
+              message="$(string.URLMapMissEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_URLMap_Miss_Event"
+              template="SymbolProxy_URLMapTemplate"
+              value="11"
+              />
+          <!-- SymSrv - Operational -->
+          <event
+              channel="SymbolProxy_Operational_Channel"
+              level="win:Informational"
+              message="$(string.SymSrvDownloadEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvDownload_Event"
+              template="SymbolProxy_SymSrvDownloadTemplate"
+              value="20"
+              />
+          <!-- SymSrv - Admin - Warning -->
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Warning"
+              message="$(string.SymSrvCriticalSymbolEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvCriticalSymbol_Event"
+              template="SymbolProxy_SymSrvCriticalSymbolTemplate"
+              value="30"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Warning"
+              message="$(string.SymSrvCriticalImageEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvCriticalImage_Event"
+              template="SymbolProxy_SymSrvCriticalImageTemplate"
+              value="31"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Warning"
+              message="$(string.SymSrvDurationEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvDurationWarning_Event"
+              template="SymbolProxy_SymSrvDurationTemplate"
+              value="32"
+              />
+          <!-- SymSrv - Admin - Error -->
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Error"
+              message="$(string.SymSrvPathNotFoundEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvPathNotFound_Event"
+              template="SymbolProxy_SymSrvErrorTemplate"
+              value="40"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Error"
+              message="$(string.SymSrvFileNotFoundEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvFileNotFound_Event"
+              template="SymbolProxy_SymSrvErrorTemplate"
+              value="41"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Error"
+              message="$(string.SymSrvAccessDeniedEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvAccessDenied_Event"
+              template="SymbolProxy_SymSrvErrorTemplate"
+              value="42"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Error"
+              message="$(string.SymSrvPathTooLongEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvPathTooLong_Event"
+              template="SymbolProxy_SymSrvErrorTemplate"
+              value="43"
+              />
+          <event
+              channel="SymbolProxy_Admin_Channel"
+              level="win:Error"
+              message="$(string.SymSrvErrorCodeEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_SymSrvErrorCode_Event"
+              template="SymbolProxy_SymSrvErrorTemplate"
+              value="49"
+              />
+          <!-- Lock Contention -->
+          <event
+              channel="SymbolProxy_Operational_Channel"
+              level="win:Warning"
+              message="$(string.LockContentionEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_LockContention_Event"
+              template="SymbolProxy_LockContentionTemplate"
+              value="90"
+              />
+          <!-- Generic Strings - Admin Channel -->
+          <!-- Generic Strings - Operational Channel -->
+          <!-- Generic Strings - Analytic Channel -->
+          <event
+              channel="SymbolProxy_Analytic_Channel"
+              level="win:Critical"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Critical_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="100"
+              />
+          <event
+              channel="SymbolProxy_Analytic_Channel"
+              level="win:Error"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Error_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="101"
+              />
+          <event
+              channel="SymbolProxy_Analytic_Channel"
+              level="win:Warning"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Warning_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="102"
+              />
+          <event
+              channel="SymbolProxy_Analytic_Channel"
+              level="win:Informational"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Info_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="103"
+              />
+          <event
+              channel="SymbolProxy_Analytic_Channel"
+              level="win:Informational"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Analytic_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="104"
+              />
+          <!-- Generic Strings - Debug Channel -->
+          <event
+              channel="SymbolProxy_Debug_Channel"
+              level="win:Informational"
+              message="$(string.AnsiStringEvent)"
+              opcode="win:Info"
+              symbol="SymbolProxy_Debug_Event"
+              template="SymbolProxy_AnsiStringTemplate"
+              value="105"
+              />
+        </events>
+      </provider>
+    </events>
+    <!-- Instrumentation Counters -->
+    <counters
+        xmlns="http://schemas.microsoft.com/win/2005/12/counters"
+        schemaVersion="2.0"
+        >
+      <!-- Counter Provider -->
+      <provider
+          applicationIdentity="%SystemRoot%\system32\inetsrv\SymProxy.dll"
+          providerGuid="{4FB06F71-953D-4c43-B84D-CE8C83579540}"
+          providerName="Microsoft-Windows-SymProxy-Counters"
+          providerType="userMode"
+          symbol="Counters"
+          >
+        <!-- Counter Set -->
+        <counterSet
+            description="Symbol Proxy Counters"
+            descriptionID="1004"
+            guid="{764B6533-9834-4ee6-B214-8CB7EE11D650}"
+            instances="multipleAggregate"
+            name="Symbol Proxy"
+            nameID="1002"
+            symbol="SymProxyCounterSet"
+            uri="Microsoft.SymProxy.Counters.SymProxyCounterSet"
+            >
+          <!-- Requests -->
+          <counter
+              aggregate="sum"
+              defaultScale="-3"
+              description="Symbol Proxy - Requests"
+              descriptionID="1014"
+              detailLevel="standard"
+              id="1"
+              name="Requests"
+              nameID="1012"
+              type="perf_counter_large_rawcount"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.Requests"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Requests/sec"
+              descriptionID="1024"
+              detailLevel="standard"
+              id="2"
+              name="Requests/sec"
+              nameID="1022"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.RequestsSec"
+              />
+          <!-- Request Duration -->
+          <counter
+              aggregate="avg"
+              baseID="4"
+              defaultScale="0"
+              description="Symbol Proxy - Average Request Duration (secs)"
+              descriptionID="1034"
+              detailLevel="standard"
+              id="3"
+              name="Request Duration (secs)/avg"
+              nameID="1032"
+              type="perf_average_timer"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.RequestTimeAvg"
+              />
+          <counter
+              description="Symbol Proxy - Average Request Duration Operations"
+              descriptionID="1044"
+              detailLevel="standard"
+              id="4"
+              name="Request Duration/ops"
+              nameID="1042"
+              type="perf_average_base"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.RequestTimeBase"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <!-- Symbol Cache Hit/Miss -->
+          <counter
+              aggregate="sum"
+              defaultScale="-1"
+              description="Symbol Proxy - Symbol Cache Hit/sec"
+              descriptionID="1104"
+              detailLevel="standard"
+              id="11"
+              name="Symbol Cache Hits/sec"
+              nameID="1102"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolHitSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="-1"
+              description="Symbol Proxy - Symbol Cache Misses/sec"
+              descriptionID="1204"
+              detailLevel="standard"
+              id="12"
+              name="Symbol Cache Misses/sec"
+              nameID="1202"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolMissSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Cache Wait Hits/sec"
+              descriptionID="1304"
+              detailLevel="standard"
+              id="13"
+              name="Symbol Cache Wait Hits/sec"
+              nameID="1302"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolWaitHitSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Cache Wait Misses/sec"
+              descriptionID="1404"
+              detailLevel="standard"
+              id="14"
+              name="Symbol Cache Wait Misses/sec"
+              nameID="1402"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolWaitMissSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Cache Wait Timeouts/sec"
+              descriptionID="1504"
+              detailLevel="standard"
+              id="15"
+              name="Symbol Cache Wait Timeouts/sec"
+              nameID="1502"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolWaitTimeoutSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Cache Wait Errors/sec"
+              descriptionID="1604"
+              detailLevel="standard"
+              id="16"
+              name="Symbol Cache Wait Errors/sec"
+              nameID="1602"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolWaitErrorSec"
+              />
+          <!-- Symbol Server Duration/Count -->
+          <counter
+              aggregate="avg"
+              baseID="22"
+              defaultScale="0"
+              description="Symbol Proxy - Average Symbol Server Duration (secs)"
+              descriptionID="2104"
+              detailLevel="standard"
+              id="21"
+              name="Symbol Server Duration (secs)/avg"
+              nameID="212"
+              type="perf_average_timer"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolServerTimeAvg"
+              />
+          <counter
+              description="Symbol Proxy - Average Symbol Server Duration Operations"
+              descriptionID="2204"
+              detailLevel="standard"
+              id="22"
+              name="Symbol Server Duration/ops"
+              nameID="2202"
+              type="perf_average_base"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolServerTimeBase"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Server Count per Second"
+              descriptionID="2304"
+              detailLevel="standard"
+              id="23"
+              name="Symbol Server Count/sec"
+              nameID="2302"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolServerCount"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Server Slow (10sec+) per Second"
+              descriptionID="2404"
+              detailLevel="standard"
+              id="24"
+              name="Symbol Server Slow (10sec+)/sec"
+              nameID="2402"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.SymbolServerSlow10Sec"
+              />
+          <!-- Symbol Server Download (PDB File) -->
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Server Download Count (PDB File)/sec"
+              descriptionID="3104"
+              detailLevel="standard"
+              id="31"
+              name="Symbol Server Download Count (PDB File)/sec"
+              nameID="3102"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.DownloadPDBPerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="-6"
+              description="Symbol Proxy - Symbol Server Download Size (PDB File)/sec"
+              descriptionID="3204"
+              detailLevel="standard"
+              id="32"
+              name="Symbol Server Download Size (PDB File)/sec"
+              nameID="3202"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.DownloadSizePDBPerSec"
+              />
+          <!-- Symbol Server Download (Other File) -->
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Symbol Server Download Count (Other File)/sec"
+              descriptionID="3304"
+              detailLevel="standard"
+              id="33"
+              name="Symbol Server Download Count (Other File)/sec"
+              nameID="3302"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.DownloadOtherPerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="-6"
+              description="Symbol Proxy - Symbol Server Download Size (Other File)/sec"
+              descriptionID="3404"
+              detailLevel="standard"
+              id="34"
+              name="Symbol Server Download Size (Other File)/sec"
+              nameID="3402"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.DownloadSizeOtherPerSec"
+              />
+          <!-- Miss Cache -->
+          <counter
+              aggregate="sum"
+              defaultScale="-2"
+              description="Symbol Proxy - Miss Cache Entries"
+              descriptionID="4104"
+              detailLevel="standard"
+              id="41"
+              name="Miss Cache Entries"
+              nameID="4102"
+              type="perf_counter_large_rawcount"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissEntries"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Miss Cache Entries (Increase)/sec"
+              descriptionID="4204"
+              detailLevel="standard"
+              id="42"
+              name="Miss Cache Entries (Increase)/sec"
+              nameID="4202"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissEntriesIncrPerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Miss Cache Entries (Decrease)/sec"
+              descriptionID="4304"
+              detailLevel="standard"
+              id="43"
+              name="Miss Cache Entries (Decrease)/sec"
+              nameID="4302"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissEntriesDecrPerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Miss Cache Hit/sec"
+              descriptionID="4404"
+              detailLevel="standard"
+              id="44"
+              name="Miss Cache Hit/sec"
+              nameID="4402"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissHitPerSec"
+              />
+          <counter
+              aggregate="avg"
+              baseID="46"
+              defaultScale="-1"
+              description="Symbol Proxy - Miss Cache Age (secs)"
+              descriptionID="4504"
+              detailLevel="standard"
+              id="45"
+              name="Miss Cache Age (secs)"
+              nameID="4502"
+              type="perf_average_timer"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissAge"
+              />
+          <counter
+              description="Symbol Proxy - Miss Cache Age Operations"
+              descriptionID="4604"
+              detailLevel="standard"
+              id="46"
+              name="Miss Cache Age Operations"
+              nameID="4602"
+              type="perf_average_base"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.MissAgeBase"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <!-- Lock Contention -->
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Lock Contention Miss Cache/sec"
+              descriptionID="6104"
+              detailLevel="standard"
+              id="61"
+              name="Lock Contention Miss Cache/sec"
+              nameID="6102"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.LockContentionMissPerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Lock Contention Symbol Store/sec"
+              descriptionID="6304"
+              detailLevel="standard"
+              id="63"
+              name="Lock Contention Symbol Store/sec"
+              nameID="6302"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.LockContentionSymStorePerSec"
+              />
+          <counter
+              aggregate="sum"
+              defaultScale="0"
+              description="Symbol Proxy - Lock Contention Configuration/sec"
+              descriptionID="6404"
+              detailLevel="standard"
+              id="64"
+              name="Lock Contention Configuration/sec"
+              nameID="6402"
+              type="perf_counter_large_delta"
+              uri="Microsoft.SymProxy.Counters.SymProxyCounterSet.LockContentionConfigPerSec"
+              />
+        </counterSet>
+      </provider>
+    </counters>
+  </instrumentation>
+  <!-- Localization -->
+  <localization>
+    <resources culture="en-US">
+      <!-- String Table -->
+      <stringTable>
+        <!-- Provider -->
+        <string
+            id="EventProviderName"
+            value="Microsoft-Windows-SymProxy"
+            />
+        <!-- Channel Names -->
+        <string
+            id="AdminChannelName"
+            value="Admin"
+            />
+        <string
+            id="OperationalChannelName"
+            value="Operational"
+            />
+        <string
+            id="AnalyticChannelName"
+            value="Analytic"
+            />
+        <string
+            id="DebugChannelName"
+            value="Debug"
+            />
+        <!-- Message Strings -->
+        <string
+            id="StartEvent"
+            value="Microsoft Symbol Server Proxy ISAPI Filter has started."
+            />
+        <string
+            id="StopEvent"
+            value="Microsoft Symbol Server Proxy ISAPI Filter has stopped."
+            />
+        <string
+            id="ConfigEvent"
+            value="%1"
+            />
+        <string
+            id="StatisticsEvent"
+            value="Miss Cache Entry Statistics%1"
+            />
+        <string
+            id="URLMapHitEvent"
+            value="ISAPI URL Map Request - Cache Hit%3Physical Path: %1%3Request URL: %2"
+            />
+        <string
+            id="URLMapMissEvent"
+            value="ISAPI URL Map Request - Cache Miss%3Physical Path: %1%3Request URL: %2"
+            />
+        <string
+            id="SymSrvDurationEvent"
+            value="SymSrv - Duration%6Physical Path: %1%6Request URL: %2%6Store: %3%6ErrorCode: %4%6Duration: %5msec"
+            />
+        <string
+            id="SymSrvDownloadEvent"
+            value="SymSrv - Downloaded File%5Physical Path: %1%5Request URL: %2%5Size: %3%5Duration: %4msec"
+            />
+        <string
+            id="SymSrvCriticalSymbolEvent"
+            value="SymSrv - Critical Symbol not indexed%4Request URL: %1%4Store: %2%4Response: %3"
+            />
+        <string
+            id="SymSrvCriticalImageEvent"
+            value="SymSrv - Critical Image not indexed%5Request URL: %1%5Store: %2%5Response: %3%5Timestamp: %4"
+            />
+        <string
+            id="SymSrvPathNotFoundEvent"
+            value="SymSrv - Path Not Found (%1)%4Path: %2%4Store: %3"
+            />
+        <string
+            id="SymSrvFileNotFoundEvent"
+            value="SymSrv - File Not Found (%1)%4Path: %2%4Store: %3"
+            />
+        <string
+            id="SymSrvAccessDeniedEvent"
+            value="SymSrv - Access Denied (%1)%4Path: %2%4Store: %3"
+            />
+        <string
+            id="SymSrvPathTooLongEvent"
+            value="SymSrv - Path Too Long (%1)%4Path: %2%4Store: %3"
+            />
+        <string
+            id="SymSrvErrorCodeEvent"
+            value="SymSrv - Error Code (%1)%4Path: %2%4Store: %3"
+            />
+        <string
+            id="LockContentionEvent"
+            value="Lock Contention experienced on the %1 critical section"
+            />
+        <string
+            id="AnsiStringEvent"
+            value="%1"
+            />
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

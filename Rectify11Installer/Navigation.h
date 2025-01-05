@@ -13,7 +13,8 @@ using namespace DirectUI;
 
 extern unsigned long dKey;
 
-extern TouchButton* defenderbtn;
+extern bool uninstall;
+
 extern TouchButton* browsebtn;
 
 extern RichText* waitAnimation;
@@ -30,9 +31,6 @@ extern HWNDElement* HElement;
 extern Value* V;
 extern WNDPROC WndProc;
 
-extern PatchType pType;
-extern InstallType iType;
-
 extern NativeHWNDHost* pwnd;
 extern Element* pMain;
 
@@ -45,6 +43,12 @@ extern TouchButton* Bck;
 
 extern Logger MainLogger;
 extern Logger NavLogger;
+
+extern wchar_t currdir[MAX_PATH];
+extern wchar_t r11dir[MAX_PATH];
+extern wchar_t r11targetdir[MAX_PATH];
+
+extern std::map<std::wstring, bool> InstallFlags;
 
 extern int nxt;
 extern int curr;

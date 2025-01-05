@@ -1,0 +1,20 @@
+<duixml>
+	<Element resid="PageMain" layoutpos="client" layout="borderlayout()" background="argb(0,0,0,0)">
+		<Element id="atom(animator2)" class="animator" layoutpos="left"/>
+		<Element layout="borderlayout()" class="page" padding="rect(-50rp,0,0,0)" layoutpos="left">
+			<Element layout="flowlayout(0,2,2,0)" padding="rect(60rp,10rp,60rp,0)" layoutpos="left">
+				<Element class="IPImage" width="250rp" height="250rp"/>
+			</Element>
+			<Element layout="borderlayout()" layoutpos="left">
+				<Richtext class="headertext" layoutpos="top" content="Uninstalling Rectify11"/>
+				<Richtext class="instructiontext" layoutpos="top" content="That's all the information we need for now. It is advised to save all your work and close all the apps while Rectify11 is being removed from your PC."/>
+				<Element layout="verticalflowlayout()" padding="rect(3rp,15rp,0,0)" layoutpos="top">
+					<Element layout="borderlayout()">
+						<Richtext id="atom(WaitAnimation)" layoutpos="left" contentalign="middlecenter" font="14pt;normal;None;Segoe UI Semilight" height="30rp" width="30rp"/>
+						<Richtext id="atom(R11Progress)" layoutpos="left" contentalign="middlecenter" padding="rect(5rp,0,0,0)" content="0%"/>
+					</Element>
+				</Element>
+			</Element>
+		</Element>
+	</Element>
+</duixml>

@@ -29,7 +29,7 @@ int ChangePage(int target) {
 			animArr[curr]->SetWidth(0);
 		}
 		else {
-			NavLogger.WriteLine(L"unspecified errfor inside page: " + to_wstring(curr) + L". Please check whether all the resources are valid or not");
+			NavLogger.WriteLine(L"unspecified error inside page: " + to_wstring(curr) + L". Please check whether all the resources are valid or not");
 		}
 	}
 	if (target >= 1) {
@@ -38,7 +38,7 @@ int ChangePage(int target) {
 			pageArr[target]->SetVisible(true);
 		}
 		else {
-			NavLogger.WriteLine(L"unspecified errfor inside page: " + to_wstring(target) + L". Please check whether all the resources are valid or not");
+			NavLogger.WriteLine(L"unspecified error inside page: " + to_wstring(target) + L". Please check whether all the resources are valid or not");
 		}
 
 		if (animArr[target]) {
@@ -46,7 +46,7 @@ int ChangePage(int target) {
 			animArr[target]->SetWidth(50);
 		}
 		else {
-			NavLogger.WriteLine(L"unspecified errfor inside page: " + to_wstring(target) + L". Please check whether all the resources are valid or not");
+			NavLogger.WriteLine(L"unspecified error inside page: " + to_wstring(target) + L". Please check whether all the resources are valid or not");
 		}
 	}
 	return target;
@@ -55,101 +55,170 @@ int ChangePage(int target) {
 void TaskAtArrival() {
 	NavLogger.WriteLine(L"TaskAtArrival() called at page " + to_wstring(curr));
 	nxt=curr+1;
-	if (curr == DEFENDERPAGE) {
-		if (Bck) {
-			NavLogger.WriteLine(L"Changing back button content string to 'Exit'");
-			Bck->SetContentString((UCString)L"Exit");
+	if (!uninstall) {
+		if (curr == DEFENDERPAGE) {
+			if (Bck) {
+				NavLogger.WriteLine(L"Changing back button content string to 'Exit'");
+				Bck->SetContentString((UCString)L"Exit");
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
 		}
 		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			if (Bck) {
+				NavLogger.WriteLine(L"Changing back button content string to 'Back'");
+				Bck->SetContentString((UCString)L"Back");
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+		}
+		if (curr == PATCHSELECTPAGE || curr == INSTALLSELECTPAGE) {
+			if (Nxt) {
+				NavLogger.WriteLine(L"Changing next button layoutpos to -3");
+				Nxt->SetLayoutPos(-3);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+		}
+		else {
+			if (Nxt) {
+				NavLogger.WriteLine(L"Changing next button layoutpos to 0");
+				Nxt->SetLayoutPos(0);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+		}
+		if (curr == PROGRESSPAGE) {
+			if (Bck) {
+				NavLogger.WriteLine(L"Hiding Back button");
+				Bck->SetVisible(false);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+			if (Nxt) {
+				NavLogger.WriteLine(L"Hiding next button");
+				Nxt->SetVisible(false);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+
+			NavLogger.WriteLine(L"Starting Main Loading Animation");
+			animThread.StartThread(&IEngineWrapper::BeginMainAnim);
+
+			NavLogger.WriteLine(L"Starting Installation");
+			NavLogger.WriteLine(L"\nInstallation log can be found in the file Installation.log\n");
+			mainThread.StartThread(&IEngineWrapper::BeginInstall);
+		}
+		if (curr == RESTARTPAGE) {
+			if (Nxt) {
+				NavLogger.WriteLine(L"Unhiding next button and setting its content string to 'Restart now'");
+				Nxt->SetVisible(true);
+				Nxt->SetContentString((UCString)L"Restart now");
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+			if (progressbar) {
+				progressbar->SetWidth(384);
+			}
+			NavLogger.WriteLine(L"Starting Restart countdown Loading Animation");
+			animThread.StartThread(&IEngineWrapper::BeginRestartAnim);
+
+			NavLogger.WriteLine(L"Starting Restart countdown");
+			mainThread.StartThread(&IEngineWrapper::BeginRestartCountdown);
 		}
 	}
 	else {
-		if (Bck) {
-			NavLogger.WriteLine(L"Changing back button content string to 'Back'");
-			Bck->SetContentString((UCString)L"Back");
+		if (curr == (UNINSTALLSELECTPAGE - MAXPAGE) + 1) {
+			if (Bck) {
+				NavLogger.WriteLine(L"Changing back button content string to 'Exit'");
+				Bck->SetContentString((UCString)L"Exit");
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
 		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
-	}
-	if (curr == PATCHSELECTPAGE || curr == INSTALLSELECTPAGE) {
-		if (Nxt) {
-			NavLogger.WriteLine(L"Changing next button layoutpos to -3");
-			Nxt->SetLayoutPos(-3);
-		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
-	}
-	else {
-		if (Nxt) {
-			NavLogger.WriteLine(L"Changing next button layoutpos to 0");
-			Nxt->SetLayoutPos(0);
-		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
-	}
-	if (curr == PROGRESSPAGE) {
-		if (Bck) {
-			NavLogger.WriteLine(L"Hiding Back button");
-			Bck->SetVisible(false);
-		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
-		if (Nxt) {
-			NavLogger.WriteLine(L"Hiding next button");
-			Nxt->SetVisible(false);
-		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
+		if (curr == (UNINSTALLPROGRESSPAGE - MAXPAGE) + 1) {
+			if (Bck) {
+				NavLogger.WriteLine(L"Hiding Back button");
+				Bck->SetVisible(false);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+			if (Nxt) {
+				NavLogger.WriteLine(L"Hiding next button");
+				Nxt->SetVisible(false);
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
 
-		NavLogger.WriteLine(L"Starting Main Loading Animation");
-		animThread.StartThread(&IEngineWrapper::BeginMainAnim);
+			NavLogger.WriteLine(L"Starting Main Loading Animation");
+			animThread.StartThread(&IEngineWrapper::BeginMainAnim);
 
-		NavLogger.WriteLine(L"Starting Installation");
-		NavLogger.WriteLine(L"\nInstallation log can be found in the file Installation.log\n");
-		mainThread.StartThread(&IEngineWrapper::BeginInstall);
-	}
-	if (curr == RESTARTPAGE) {
-		if (Nxt) {
-			NavLogger.WriteLine(L"Unhiding next button and setting its content string to 'Restart now'");
-			Nxt->SetVisible(true);
-			Nxt->SetContentString((UCString)L"Restart now");
+			NavLogger.WriteLine(L"Starting Installation");
+			NavLogger.WriteLine(L"\nInstallation log can be found in the file Installation.log\n");
+			mainThread.StartThread(&IEngineWrapper::BeginUninstall);
 		}
-		else {
-			NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
-		}
-		if (progressbar) {
-			progressbar->SetWidth(384);
-		}
-		NavLogger.WriteLine(L"Starting Restart countdown Loading Animation");
-		animThread.StartThread(&IEngineWrapper::BeginRestartAnim);
+		if (curr == (UNINSTALLRESTARTPAGE - MAXPAGE) + 1) {
+			if (Nxt) {
+				NavLogger.WriteLine(L"Unhiding next button and setting its content string to 'Restart now'");
+				Nxt->SetVisible(true);
+				Nxt->SetContentString((UCString)L"Restart now");
+			}
+			else {
+				NavLogger.WriteLine(L"Unspecified errfor. Please check validity of duixml");
+			}
+			if (progressbar) {
+				progressbar->SetWidth(384);
+			}
+			NavLogger.WriteLine(L"Starting Restart countdown Loading Animation");
+			animThread.StartThread(&IEngineWrapper::BeginRestartAnim);
 
-		NavLogger.WriteLine(L"Starting Restart countdown");
-		mainThread.StartThread(&IEngineWrapper::BeginRestartCountdown);
+			NavLogger.WriteLine(L"Starting Restart countdown");
+			mainThread.StartThread(&IEngineWrapper::BeginRestartCountdown);
+		}
 	}
+
 }
 void TaskAtLeave() {
 	NavLogger.WriteLine(L"\nTaskAtLeave() called at page " + to_wstring(curr));
-	if (curr == PROGRESSPAGE) {
-		NavLogger.WriteLine(L"Stopping all threads");
-		animThread.StopThread();
-		mainThread.StopThread();
+	if (!uninstall) {
+		if (curr == PROGRESSPAGE) {
+			NavLogger.WriteLine(L"Stopping all threads");
+			animThread.StopThread();
+			mainThread.StopThread();
+		}
+		if (curr == RESTARTPAGE) {
+			NavLogger.WriteLine(L"Stopping animation threads and exit");
+			animThread.StopThread();
+			IEngineWrapper::Ttime.store(0);
+		}
 	}
-	if (curr == RESTARTPAGE) {
-		NavLogger.WriteLine(L"Stopping animation threads and exit");
-		animThread.StopThread();
-		IEngineWrapper::Ttime.store(0);
+	else {
+		if (curr == (UNINSTALLPROGRESSPAGE - MAXPAGE) + 1) {
+			NavLogger.WriteLine(L"Stopping all threads");
+			animThread.StopThread();
+			mainThread.StopThread();
+		}
+		if (curr == (UNINSTALLRESTARTPAGE - MAXPAGE) + 1) {
+			NavLogger.WriteLine(L"Stopping animation threads and exit");
+			animThread.StopThread();
+			IEngineWrapper::Ttime.store(0);
+		}
 	}
 }
 void Navigate() {
 	TaskAtLeave();
 	NavLogger.WriteLine(L"Starting Navigation from page " + to_wstring(curr) + L" to " + to_wstring(nxt));
-	if (curr < MAXPAGE-1) {
+	if ((curr < MAXPAGE-1 && !uninstall) || (curr < MAXUNINSTPAGE-1 && uninstall)) {
 		curr = ChangePage(nxt);
 		if (progressbar) {
 			NavLogger.WriteLine(L"Setting progress bar width to " + to_wstring(curr * 15 + progressbar->GetWidth()));

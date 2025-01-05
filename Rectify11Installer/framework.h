@@ -10,6 +10,9 @@
 #include <Windows.h>
 #include <dwmapi.h>
 #include <winerror.h>
+#include <strsafe.h>
+#include <shellapi.h>
+#include <psapi.h>
 
 // C++ RunTime Header Files
 #include <atomic>
@@ -20,6 +23,7 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <map>
 
 #define DEFENDERPAGE               1
 #define PATCHSELECTPAGE            2
@@ -29,4 +33,9 @@
 #define PROGRESSPAGE               6
 #define RESTARTPAGE                7
 
+#define UNINSTALLSELECTPAGE        8
+#define UNINSTALLPROGRESSPAGE      9
+#define UNINSTALLRESTARTPAGE       10
+
 #define MAXPAGE                    8
+#define MAXUNINSTPAGE              4

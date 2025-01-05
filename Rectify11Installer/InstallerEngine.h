@@ -5,12 +5,6 @@
 #define WM_UPDATECOUNTDOWN WM_USER+4
 #define WM_SETUPCOMPLETE WM_USER+5
 
-enum PatchType {
-	SYSTEM, ISO
-};
-enum InstallType {
-	EXPRESS, FULL, NONE
-};
 
 #ifndef MY_HEADER_H
 #define MY_HEADER_H
@@ -18,24 +12,23 @@ enum InstallType {
 #include "framework.h"
 using namespace std;
 
-void GetInstallInfo(PatchType pTypeW, InstallType iTypeW);
-
 #endif
 
 class IEngineWrapper {
 private:
-	thread ienThread;
+	HANDLE ienThread;
 
 public:
 	static atomic_bool animate;
 	static atomic<int> progressnum;
 	static atomic<int> Ttime;
-	static wstring currfile;
-	void StartThread(void (*func)());
+	static wstring currprogress;
+	void StartThread(unsigned long (*func)(LPVOID lpParam));
 	void StopThread();
-	static void BeginMainAnim();
-	static void BeginRestartAnim();
-	static void BeginInstall();
-	static void BeginRestartCountdown();
+	static unsigned long BeginMainAnim(LPVOID lpParam);
+	static unsigned long BeginRestartAnim(LPVOID lpParam);
+	static unsigned long BeginInstall(LPVOID lpParam);
+	static unsigned long BeginUninstall(LPVOID lpParam);
+	static unsigned long BeginRestartCountdown(LPVOID lpParam);
 	static void LogWriter(wfstream& wfs, wstring ws);
 };

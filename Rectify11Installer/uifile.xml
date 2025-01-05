@@ -170,19 +170,19 @@
 				<richtext contentalign="wrapleft|endellipsis" padding="rect(8rp,0,8rp,0)" constrainlayout="narrow"/>
 			</if>
 			<if class="PTImage">
-				<Element background="sgraphic(2,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element background="resbmp(2,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="ISOImage">
-				<Element background="sgraphic(4,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element background="resbmp(4,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="ITImage">
-				<Element background="sgraphic(8,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element background="resbmp(8,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="CMPImage">
-				<Element background="sgraphic(6,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element background="resbmp(7,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="IPImage">
-				<Element background="sgraphic(10,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element background="resbmp(10,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 		</style>
 		<style resid="Sdark">
@@ -314,19 +314,19 @@
 				<richtext contentalign="wrapleft|endellipsis" padding="rect(8rp,0,8rp,0)" constrainlayout="narrow"/>
 			</if>
 			<if class="PTImage">
-				<Element direction="ltr" background="sgraphic(3,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element direction="ltr" background="resbmp(3,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="ISOImage">
-				<Element direction="ltr" background="sgraphic(5,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element direction="ltr" background="resbmp(5,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="ITImage">
-				<Element direction="ltr" background="sgraphic(9,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element direction="ltr" background="resbmp(9,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="CMPImage">
-				<Element direction="ltr" background="sgraphic(7,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element direction="ltr" background="resbmp(6,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 			<if class="IPImage">
-				<Element direction="ltr" background="sgraphic(11,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element direction="ltr" background="resbmp(11,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</if>
 		</style>
 	</stylesheets>

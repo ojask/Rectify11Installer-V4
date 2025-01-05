@@ -22,6 +22,9 @@
     <Filter Include="Resource Files\Dll">
       <UniqueIdentifier>{5b24bb57-0164-4f68-b930-f19b9c56f849}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Rectify11">
+      <UniqueIdentifier>{77c86297-8c32-4cab-9585-942c77c075a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -153,6 +156,15 @@
     <ClInclude Include="DirectUI\Button.h">
       <Filter>Header Files\DirectUI</Filter>
     </ClInclude>
+    <ClInclude Include="InstallationProcedure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InitUninst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UninstallationProcedure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rectify11Installer.cpp">
@@ -168,6 +180,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InstallationProcedure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InitUninst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UninstallationProcedure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,6 +230,15 @@
     <Xml Include="uifile.xml">
       <Filter>Resource Files</Filter>
     </Xml>
+    <Xml Include="Pages\8.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\10.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
+    <Xml Include="Pages\9.xml">
+      <Filter>Resource Files\Pages</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest" />
@@ -222,6 +252,12 @@
     </None>
     <None Include="Base.dll">
       <Filter>Resource Files\Dll</Filter>
+    </None>
+    <None Include="Rectify11\7za.exe">
+      <Filter>Resource Files\Rectify11</Filter>
+    </None>
+    <None Include="Rectify11\Files.7z">
+      <Filter>Resource Files\Rectify11</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

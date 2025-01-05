@@ -3,14 +3,21 @@
 		<Element id="atom(animator1)" class="animator" layoutpos="left"/>
 		<Element layout="borderlayout()" class="page" padding="rect(-50rp,0,0,0)" layoutpos="left">
 			<Element layout="flowlayout(0,2,2,0)" padding="rect(65rp,10rp,55rp,0)" layoutpos="left">
-				<Element width="250rp" direction="ltr" height="250rp" background="sgraphic(1,7,-1,0,0,1,1,library(PageRes.dll))"/>
+				<Element width="250rp" direction="ltr" height="250rp" background="resbmp(1,7,-1,0,0,1,1,library(PageRes.dll))"/>
 			</Element>
 			<Element layout="borderlayout()" layoutpos="left">
-				<Richtext class="headertext" layoutpos="top" content="Before you begin..."/>
+				<Richtext class="headertext" layoutpos="top" content="Welcome"/>
 				<Richtext class="instructiontext" layoutpos="top"
-				content="Windows Defender can cause problems with Rectify11 Installation and potentially breaking your system. Hence it is advised to disable Real Time Protection in Windows Defender. Click Next when ready."/>
-				<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="top">
-					<TouchButton class="NormalButton" id="atom(opendefender)" content="Open Defender"/>
+				content="Welcome to Rectify11 Installation Wizard. It is recommended to save all your work and close all the apps."/>
+				<Richtext class="instructiontext" layoutpos="top"
+				content="Please read FAQ section and credits before proceeding, click Next to proceed, Exit to cancel the installation."/>
+				<Element layout="borderlayout()" layoutpos="top">
+					<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="left">
+						<TouchButton class="NormalButton" id="atom(FAQ)" height="35rp" width="140rp" content="FAQ"/>
+					</Element>
+					<Element layout="flowlayout()" padding="rect(10rp,15rp,0,0)"  layoutpos="left">
+						<TouchButton class="NormalButton" id="atom(Credits)" height="35rp" width="140rp" content="Credits"/>
+					</Element>
 				</Element>
 			</Element>
 		</Element>

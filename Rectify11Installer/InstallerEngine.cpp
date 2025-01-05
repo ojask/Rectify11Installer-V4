@@ -2,18 +2,16 @@
 #include "InstallerEngine.h"
 #include "DirectUI/DirectUI.h"
 #include "Navigation.h"
+#include "InstallationProcedure.h"
 
 using namespace DirectUI;
-
-PatchType patchType;
-InstallType installType;
 
 std::atomic_bool IEngineWrapper::animate = true;
 std::atomic<int> IEngineWrapper::progressnum = 0;
 std::atomic<int> IEngineWrapper::Ttime = 30;
-std::wstring IEngineWrapper::currfile = L"";
+std::wstring IEngineWrapper::currprogress = L"";
 
-void IEngineWrapper::BeginMainAnim() {
+unsigned long IEngineWrapper::BeginMainAnim(LPVOID lpParam) {
     while (animate.load()) {
         SendMessage(pwnd->GetHWND(), WM_UPDATEANIMATIONFRAME, NULL, NULL);
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -21,7 +19,7 @@ void IEngineWrapper::BeginMainAnim() {
     ExitThread(0);
 }
 
-void IEngineWrapper::BeginRestartAnim() {
+unsigned long IEngineWrapper::BeginRestartAnim(LPVOID lpParam) {
     while (animate.load()) {
         SendMessage(pwnd->GetHWND(), WM_UPDATERESTARTANIMATIONFRAME, NULL, NULL);
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -29,21 +27,39 @@ void IEngineWrapper::BeginRestartAnim() {
     ExitThread(0);
 }
 
-void IEngineWrapper::BeginInstall(){
+unsigned long IEngineWrapper::BeginInstall(LPVOID lpParam){
     std::wstring ws;
-    int i = 0;
-    while (progressnum<=100 && animate.load()) {
-         currfile = L"file" + std::to_wstring(progressnum) + L".dll";
-         SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
-         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-         i++;
-         progressnum.store(i);
-    }    
+
+    currprogress = L"Extracting files...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    extractFIles();
+    currprogress = L"Copying files...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    MoveFilesToTarget();
+    currprogress = L"Installing fonts...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    InstallFonts();
+    currprogress = L"Installing Programs...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    InstallPrograms();
+    currprogress = L"Installing Tweaks...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    RegisterWHMods();
+     
     SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
     ExitThread(0);
 }
 
-void IEngineWrapper::BeginRestartCountdown() {
+unsigned long IEngineWrapper::BeginUninstall(LPVOID lpParam) {
+
+    currprogress = L"Uninstall demo..";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
+    ExitThread(0);
+}
+
+unsigned long IEngineWrapper::BeginRestartCountdown(LPVOID lpParam) {
     int i = 30;
     while (Ttime.load() >= 0 && animate.load()) {
             SendMessage(pwnd->GetHWND(), WM_UPDATECOUNTDOWN, NULL, NULL);
@@ -51,15 +67,15 @@ void IEngineWrapper::BeginRestartCountdown() {
             i--;
             Ttime.store(i);
     }
+    SetupComplete();
     SendMessage(pwnd->GetHWND(), WM_DESTROY, NULL, NULL);
     ExitThread(0);
 }
 
-void IEngineWrapper::StartThread(void (*func)()) {
+void IEngineWrapper::StartThread(unsigned long (*func)(LPVOID lpParam)) {
     animate.store(true);
-    std::thread tmp(func);
-    ienThread.swap(tmp);
-    ienThread.detach();
+    DWORD myThreadID;
+    ienThread = CreateThread(0, 0, func, NULL, 0, &myThreadID);
 }
 
 void IEngineWrapper::StopThread() {
@@ -68,9 +84,4 @@ void IEngineWrapper::StopThread() {
 
 void IEngineWrapper::LogWriter(wfstream& wfs, wstring ws) {
     wfs << ws << endl;
-}
-
-void GetInstallInfo(PatchType pTypeW, InstallType iTypeW) {
-    patchType = pTypeW;
-    installType = iTypeW;
 }

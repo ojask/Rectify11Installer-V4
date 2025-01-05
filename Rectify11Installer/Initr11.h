@@ -6,5 +6,6 @@
 bool CheckVer(int build);
 bool GetUserAppMode();
 int InitInstaller();
+int ChangeSheet();
 
 #endif

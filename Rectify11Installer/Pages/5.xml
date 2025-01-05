@@ -11,9 +11,8 @@
 				<Element id="atom(CmpContainer)" layout="verticalflowlayout(0,2,0,0)" padding="rect(10rp,15rp,0,0)" layoutpos="left">
 					<TouchCheckBox id="atom(chk1)" checkedstate="checked" content="Themes"/>
 					<TouchCheckBox id="atom(chk2)" checkedstate="checked" content="Accent Colorizer"/>
-					<TouchCheckBox id="atom(chk3)" checkedstate="checked" content="Startify"/>
-					<TouchCheckBox id="atom(chk4)" checkedstate="checked" content="Explorerpatcher"/>
-					<TouchCheckBox id="atom(chk5)" checkedstate="checked" content="MicaForEveryone"/>
+					<TouchCheckBox id="atom(chk3)" checkedstate="checked" content="Enhanced Start Menu and Taskbar"/>
+					<TouchCheckBox id="atom(chk4)" checkedstate="checked" content="Enhanced Explorer layout"/>
 				</Element>
 			</Element>
 		</Element>

@@ -7,6 +7,7 @@
 #include "DirectUI/DirectUI.h"
 
 #include "Initr11.h"
+#include "InitUninst.h"
 #include "Navigation.h"
 #include "InstallerEngine.h"
 #include "Logger.h"
@@ -31,9 +32,6 @@ HWNDElement* HElement;
 Value* V;
 WNDPROC WndProc;
 
-PatchType pType;
-InstallType iType;
-
 NativeHWNDHost* pwnd;
 Element* pMain;
 
@@ -47,10 +45,18 @@ TouchButton* Bck;
 Logger MainLogger;
 Logger NavLogger;
 
+bool uninstall = true;
+
+wchar_t currdir[MAX_PATH] = {};
+wchar_t r11dir[MAX_PATH] = {};
+wchar_t r11targetdir[MAX_PATH] = {};
+
 int nxt = 1;
 int curr = 0;
 int currframe = 112;
 unsigned long dKey;
+
+std::map<std::wstring, bool> InstallFlags;
 
 void NavNext(Element* elem, Event* iev) {
     if (iev->type == TouchButton::Click) {
@@ -71,7 +77,7 @@ void NavBack(Element* elem, Event* iev) {
 void NavISO(Element* elem, Event* iev) {
     if (iev->type == TouchButton::Click) {
         Navigate();
-        pType = ISO;
+        
     }
 }
 
@@ -79,36 +85,35 @@ void NavSYS(Element* elem, Event* iev) {
     if (iev->type == TouchButton::Click) {
         nxt = 4;
         Navigate();
-        pType = SYSTEM;
-    }
-}
-
-void NavExp(Element* elem, Event* iev) {
-    if (iev->type == TouchButton::Click) {
-        Navigate();
-        iType = EXPRESS;
+        
     }
 }
 
 void NavFull(Element* elem, Event* iev) {
     if (iev->type == TouchButton::Click) {
         Navigate();
-        iType = FULL;
+        InstallFlags[L"INSTALLICONS"] = true;
     }
 }
 
 void NavNone(Element* elem, Event* iev) {
     if (iev->type == TouchButton::Click) {
         Navigate();
-        iType = NONE;
+        InstallFlags[L"INSTALLICONS"] = false;
     }
 }
 
 void HandleThemesChk(Element* elem, Event* iev) {
     TouchCheckBox* tch = (TouchCheckBox*)elem;
     if (iev->type == TouchButton::Click) {
-        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) tch->SetCheckedState(CheckedStateFlags_NONE);
-        else tch->SetCheckedState(CheckedStateFlags_CHECKED);
+        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) { 
+            tch->SetCheckedState(CheckedStateFlags_NONE);
+            InstallFlags[L"INSTALLTHEMES"] = false;
+        }
+        else {
+            tch->SetCheckedState(CheckedStateFlags_CHECKED);
+            InstallFlags[L"INSTALLTHEMES"] = true;
+        }
     }
 }
 
@@ -120,7 +125,7 @@ void HandleAsdfChk(Element* elem, Event* iev) {
     }
 }
 
-void HandleStartifyChk(Element* elem, Event* iev) {
+void HandleShellChk(Element* elem, Event* iev) {
     TouchCheckBox* tch = (TouchCheckBox*)elem;
     if (iev->type == TouchButton::Click) {
         if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) tch->SetCheckedState(CheckedStateFlags_NONE);
@@ -128,7 +133,7 @@ void HandleStartifyChk(Element* elem, Event* iev) {
     }
 }
 
-void HandleEPChk(Element* elem, Event* iev) {
+void HandleExplorerChk(Element* elem, Event* iev) {
     TouchCheckBox* tch = (TouchCheckBox*)elem;
     if (iev->type == TouchButton::Click) {
         if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) tch->SetCheckedState(CheckedStateFlags_NONE);
@@ -136,11 +141,17 @@ void HandleEPChk(Element* elem, Event* iev) {
     }
 }
 
-void HandleMFEChk(Element* elem, Event* iev) {
+void HandleIconChk(Element* elem, Event* iev) {
     TouchCheckBox* tch = (TouchCheckBox*)elem;
     if (iev->type == TouchButton::Click) {
-        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) tch->SetCheckedState(CheckedStateFlags_NONE);
-        else tch->SetCheckedState(CheckedStateFlags_CHECKED);
+        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) {
+            tch->SetCheckedState(CheckedStateFlags_NONE);
+            InstallFlags[L"INSTALLICONS"] = false;
+        }
+        else {
+            tch->SetCheckedState(CheckedStateFlags_CHECKED);
+            InstallFlags[L"INSTALLICONS"] = true;
+        }
     }
 }
 
@@ -173,8 +184,7 @@ LRESULT CALLBACK SubclassWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
             if (currframe == 230) currframe = 112;
         }
         case WM_UPDATEPROGRESS: {
-            std::wstring ws = std::to_wstring(IEngineWrapper::progressnum.load()) + L"% ("+IEngineWrapper::currfile +L")";
-            progressmeter->SetContentString((UCString)ws.c_str());
+            progressmeter->SetContentString((UCString)IEngineWrapper::currprogress.c_str());
             break;
         }
         case WM_UPDATECOUNTDOWN: {
@@ -200,6 +210,11 @@ LRESULT CALLBACK SubclassWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) {
+
+
+    InstallFlags[L"NONE"] = true;
+    InstallFlags[L"INSTALLICONS"] = true;
+    InstallFlags[L"INSTALLTHEMES"] = true;
 
     HRESULT err = 0;
     wchar_t currdir[MAX_PATH];
@@ -277,11 +292,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     pMain->EndDefer(dKey);
     pwnd->Host(pMain);
 
-    err = InitInstaller();
-    MainLogger.WriteLine(L"InitInstaller() completed",err);
-    if (FAILED(err)) {
-        MainLogger.WriteLine(L"Installer Initialisation failed.");
-        return err;
+    if (!uninstall) {
+        err = InitInstaller();
+        MainLogger.WriteLine(L"InitInstaller() completed", err);
+        if (FAILED(err)) {
+            MainLogger.WriteLine(L"Installer Initialisation failed.");
+            return err;
+        }
+    }
+    else {
+        err = InitUninstaller();
+        MainLogger.WriteLine(L"InitUninstaller() completed", err);
+        if (FAILED(err)) {
+            MainLogger.WriteLine(L"Uninstaller Initialisation failed.");
+            return err;
+        }
     }
     Navigate();
     pwnd->ShowWindow(SW_SHOW);

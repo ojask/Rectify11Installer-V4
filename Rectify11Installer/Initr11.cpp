@@ -108,7 +108,6 @@ void InitControls() {
     Nxt->AddListener(new EventListener(NavNext));
     Bck->AddListener(new EventListener(NavBack));
 
-    defenderbtn = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"opendefender"));
     browsebtn = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"browsebtn"));
 
     TouchButton* SYS = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"PatchSystem"));
@@ -120,23 +119,21 @@ void InitControls() {
     waitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"WaitAnimation"));
     restartWaitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"RestartWaitAnimation"));
 
-    TouchButton* Express = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"Express"));
     TouchButton* Full = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"Full"));
     TouchButton* None = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"None"));
 
     progressmeter = (RichText*)pMain->FindDescendent(StrToID((UCString)L"R11Progress"));
     Countdown = (RichText*)pMain->FindDescendent(StrToID((UCString)L"RestartCountdown"));
 
-    void (*fArr[])(Element*, Event*) = { HandleThemesChk, HandleAsdfChk, HandleStartifyChk, HandleEPChk, HandleMFEChk };
+    void (*fArr[])(Element*, Event*) = { HandleThemesChk, HandleAsdfChk, HandleShellChk, HandleExplorerChk};
     TouchCheckBox* tch;
     std::wstring ws;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
         ws = L"chk" + std::to_wstring(i + 1);
         tch = (TouchCheckBox*)pMain->FindDescendent(StrToID((UCString)ws.c_str()));
         tch->AddListener(new EventListener(fArr[i]));
     }
 
-    Express->AddListener(new EventListener(NavExp));
     Full->AddListener(new EventListener(NavFull));
     None->AddListener(new EventListener(NavNone));
 
@@ -156,10 +153,14 @@ int ChangeSheet() {
     if (GetUserAppMode()) {
         MainLogger.WriteLine(L"Light mode detected\nGetting Stylesheet information...");
         err = pParser->GetSheet((UCString)L"S", &v);
+        InstallFlags[L"LIGHTTHEME"] = true;
+        InstallFlags[L"DARKTHEME"] = false;
     }
     else {
         MainLogger.WriteLine(L"Dark mode detected\nGetting Stylesheet information...");
         err = pParser->GetSheet((UCString)L"Sdark", &v);
+        InstallFlags[L"LIGHTTHEME"] = false;
+        InstallFlags[L"DARKTHEME"] = true;
     }
     if (FAILED(err)) {
         MainLogger.WriteLine(L"Failed to get Stylesheet information.", err);
@@ -185,15 +186,21 @@ int ChangeSheet() {
 int InitInstaller() {
     if (!CheckVer(21343)) {
         err = -21343;
-        TaskDialog(NULL, NULL, L"no", L"compatibility error", L"no", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
-        MainLogger.WriteLine(L"This Windows Build is not support. Windows 10 Build 21343 and above is required.", err);
+        TaskDialog(NULL, NULL, L"no", L"unsupported", L"no", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        MainLogger.WriteLine(L"This Windows Build is not supported. Windows 10 Build 21343 and above is required.", err);
         return err;
     }
-    wchar_t wc[MAX_PATH];
-    GetCurrentDirectoryW(MAX_PATH, wc);
-    std::wstring ws(wc);
+
+    GetCurrentDirectory(MAX_PATH, currdir);
+    std::wstring ws(currdir);
     std::wstring fpath = ws + L"\\segoe_r11.ttf";
-    AddFontResourceW(fpath.c_str());
+    AddFontResource(fpath.c_str());
+
+    wchar_t windir[MAX_PATH];
+    GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
+
+    StringCchPrintf(r11dir, MAX_PATH, L"%s\\Rectify11", currdir);
+    StringCchPrintf(r11targetdir, MAX_PATH, L"%s\\Rectify11", windir);
 
     MainLogger.WriteLine(L"Initializing pages...\n\n\n");
     err = InitPages();

@@ -1,3 +1,0 @@
-%r11files%\windhawk_setup_offline.exe /S|NONE
-%r11files%\SymChk\symchk.exe "%systemroot%\Explorer.exe" /s SRV*%programdata%\Windhawk\Engine\symbols\*http://msdl.microsoft.com/download/symbols|NONE
-%r11files%\SymChk\symchk.exe "%systemroot%\system32\Shlwapi.dll" /s SRV*%programdata%\Windhawk\Engine\symbols\*http://msdl.microsoft.com/download/symbols|NONE

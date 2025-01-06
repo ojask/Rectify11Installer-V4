@@ -10,13 +10,15 @@
 				<Richtext class="instructiontext" layoutpos="top"
 				content="Welcome to Rectify11 Installation Wizard. It is recommended to save all your work and close all the apps."/>
 				<Richtext class="instructiontext" layoutpos="top"
-				content="Please read FAQ section and credits before proceeding, click Next to proceed, Exit to cancel the installation."/>
-				<Element layout="borderlayout()" layoutpos="top">
+				content="Please read notes and credits before proceeding, click Next to proceed, Exit to cancel the installation."/>
+				<Richtext class="instructiontext" foreground="rgb(236,64,78)" layoutpos="top"
+				content="Warning: This is a beta build of Rectify11, do NOT use it on your main PC."/>
+				<Element layout="borderlayout()" layoutpos="none">
 					<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="left">
-						<TouchButton class="NormalButton" id="atom(FAQ)" height="35rp" width="140rp" content="FAQ"/>
+						<TouchButton class="NormalButton" id="atom(notes)" height="35rp" width="140rp" content="Notes"/>
 					</Element>
 					<Element layout="flowlayout()" padding="rect(10rp,15rp,0,0)"  layoutpos="left">
-						<TouchButton class="NormalButton" id="atom(Credits)" height="35rp" width="140rp" content="Credits"/>
+						<TouchButton class="NormalButton" id="atom(credits)" height="35rp" width="140rp" content="Credits"/>
 					</Element>
 				</Element>
 			</Element>

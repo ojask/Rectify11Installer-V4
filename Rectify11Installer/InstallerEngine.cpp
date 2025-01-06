@@ -3,6 +3,7 @@
 #include "DirectUI/DirectUI.h"
 #include "Navigation.h"
 #include "InstallationProcedure.h"
+#include "UninstallationProcedure.h"
 
 using namespace DirectUI;
 
@@ -32,7 +33,7 @@ unsigned long IEngineWrapper::BeginInstall(LPVOID lpParam){
 
     currprogress = L"Extracting files...";
     SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
-    extractFIles();
+    extractFiles();
     currprogress = L"Copying files...";
     SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     MoveFilesToTarget();
@@ -45,6 +46,9 @@ unsigned long IEngineWrapper::BeginInstall(LPVOID lpParam){
     currprogress = L"Installing Tweaks...";
     SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     RegisterWHMods();
+    currprogress = L"Finishing Installation...";
+    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    FinaliseInstall();
      
     SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
     ExitThread(0);
@@ -52,9 +56,11 @@ unsigned long IEngineWrapper::BeginInstall(LPVOID lpParam){
 
 unsigned long IEngineWrapper::BeginUninstall(LPVOID lpParam) {
 
-    currprogress = L"Uninstall demo..";
+    currprogress = L"Uninstalling...";
     SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    RemoveWHMods();
+    RemoveSecureUX();
+    FinaliseUninstall();
     SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
     ExitThread(0);
 }

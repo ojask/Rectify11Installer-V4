@@ -13,6 +13,7 @@
 #include <strsafe.h>
 #include <shellapi.h>
 #include <psapi.h>
+#include <wininet.h>
 
 // C++ RunTime Header Files
 #include <atomic>

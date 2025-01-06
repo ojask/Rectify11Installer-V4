@@ -1,69 +1,71 @@
 #include "UninstallationProcedure.h"
+#include "InstallationProcedure.h"
 #include "resource.h"
 #include "framework.h"
 #include "Navigation.h"
 
-wchar_t path[MAX_PATH];
-wchar_t cmd[1024];
-
-STARTUPINFO startup_info;
-PROCESS_INFORMATION process_info;
-
-void RunEXE(wchar_t exe[], wchar_t args[]) {
-	memset(&startup_info, 0, sizeof(STARTUPINFO));
-	startup_info.cb = sizeof(STARTUPINFO);
-	memset(&process_info, 0, sizeof(PROCESS_INFORMATION));
-
-
-	BOOL rv = CreateProcess(exe, args, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &startup_info, &process_info);
-	if (rv) {
-		CloseHandle(process_info.hThread);
-		WaitForSingleObject(process_info.hProcess, INFINITE);
-		CloseHandle(process_info.hProcess);
-	}
-}
+wchar_t exepath[MAX_PATH];
 
 void RemoveWHMods() {
 	if (InstallFlags[L"INSTALLTHEMES"] == true) {
-		wchar_t windir[MAX_PATH];
-		GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
 
-		StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\logon-logoff-shutdown-sounds";
-		RunEXE(path, args);
+		InstallationLogger.WriteLine(L"Uninstalling sound hook...");
 
-		wchar_t windir[MAX_PATH];
-		GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\logon-logoff-shutdown-sounds /f";
+		RunEXE(exepath, args);
 
-		StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args2[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\uxtheme-hook";
-		RunEXE(path, args2);
+		InstallationLogger.WriteLine(L"Uninstalling uxtheme hook...");
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args2[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\uxtheme-hook /f";
+		RunEXE(exepath, args2);
 	}
 	if (InstallFlags[L"INSTALLICONS"] == true) {
-		wchar_t windir[MAX_PATH];
-		GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
 
-		StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\icon-resource-redirect";
-		RunEXE(path, args);
+		InstallationLogger.WriteLine(L"Uninstalling resource redirect...");
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\icon-resource-redirect /f";
+		RunEXE(exepath, args);
 	}
 }
 
 void RemoveSecureUX() {
 	if (InstallFlags[L"INSTALLTHEMES"] == true) {
-		wchar_t windir[MAX_PATH];
-		GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
 
-		StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args[] = L"/c reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\winlogon.exe\" /v VerifierDlls";
-		RunEXE(path, args);
+		InstallationLogger.WriteLine(L"Uninstalling secureuxtheme...");
 
-		wchar_t windir[MAX_PATH];
-		GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args[] = L"/c reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\winlogon.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args);
 
-		StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args2[] = L"/c reg delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\winlogon.exe\" /v VerifierDlls";
-		RunEXE(path, args2);
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args2[] = L"/c reg delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\winlogon.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args2);
+
 	}
+}
+
+void FinaliseUninstall() {
+	if (InstallFlags[L"INSTALLTHEMES"] == true) {
+
+		InstallationLogger.WriteLine(L"Finishing uninstallation...");
+
+		if (InstallFlags[L"LIGHTTHEME"] == true) {
+			StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+			wchar_t args[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce /v ApplyTheme /t REG_SZ /d \"cmd.exe /c %systemroot%\\resources\\themes\\aero.theme\"";
+			RunEXE(exepath, args);
+		}
+		if (InstallFlags[L"DARKTHEME"] == true) {
+			StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+			wchar_t args[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce /v ApplyTheme /t REG_SZ /d \"cmd.exe /c %systemroot%\\resources\\themes\\dark.theme\"";
+			RunEXE(exepath, args);
+		}
+
+	}
+	StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+	wchar_t args[] = L"/c reg delete HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /f";
+	RunEXE(exepath, args);
 }
 

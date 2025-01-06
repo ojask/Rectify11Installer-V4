@@ -42,14 +42,19 @@ Element* progressbar;
 TouchButton* Nxt;
 TouchButton* Bck;
 
+TouchButton* notes;
+TouchButton* credits;
+
 Logger MainLogger;
 Logger NavLogger;
+Logger InstallationLogger;
 
-bool uninstall = true;
+bool uninstall = false;
 
 wchar_t currdir[MAX_PATH] = {};
 wchar_t r11dir[MAX_PATH] = {};
 wchar_t r11targetdir[MAX_PATH] = {};
+wchar_t windir[MAX_PATH] = {};
 
 int nxt = 1;
 int curr = 0;
@@ -168,6 +173,14 @@ void SetBackdrop() {
     }
 }
 
+bool DetectUninstall() {
+    LPCWSTR path = L"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify";
+    HKEY hKey;
+    DWORD lResult = RegOpenKeyEx(HKEY_LOCAL_MACHINE, path, 0, KEY_READ, &hKey);
+    if (lResult == ERROR_SUCCESS) return true;
+    return false;
+}
+
 LRESULT CALLBACK SubclassWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_UPDATEANIMATIONFRAME: {
@@ -217,15 +230,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     InstallFlags[L"INSTALLTHEMES"] = true;
 
     HRESULT err = 0;
-    wchar_t currdir[MAX_PATH];
     GetCurrentDirectory(MAX_PATH, currdir);
     wstring ws(currdir);
+
+    GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
+    StringCchPrintf(r11dir, MAX_PATH, L"%s\\Rectify11", currdir);
+    StringCchPrintf(r11targetdir, MAX_PATH, L"%s\\Rectify11", windir);
+
     MainLogger.StartLogger((ws+L"\\Initialization.log").c_str());
     NavLogger.StartLogger((ws + L"\\Navigation.log").c_str());
+    InstallationLogger.StartLogger((ws + L"\\Installation.log").c_str());
+
+    wchar_t fPathOld[MAX_PATH];
+    wchar_t fPath[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, currdir);
+    StringCchPrintf(fPathOld, MAX_PATH, L"%s\\segoe_r11.ttf", currdir);
+    StringCchPrintf(fPath, MAX_PATH, L"%s\\segoe_r11.ttf", windir);
+    CopyFile(fPathOld, fPath, false);
+    AddFontResource(fPath);
 
     hinst = hInstance;
     pageArr.push_back(NULL);
     animArr.push_back(NULL);
+
+    uninstall = DetectUninstall();
 
 
     err = InitProcessPriv(14, NULL, NULL, false);
@@ -257,7 +285,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         MainLogger.WriteLine(L"Failed to create installer window.");
         return err;
     }
-
+    
     SetBackdrop();
     WndProc = (WNDPROC)SetWindowLongPtrW(pwnd->GetHWND(), GWLP_WNDPROC, (LONG_PTR)SubclassWindowProc);
     err = DUIXmlParser::Create(&pParser, NULL, NULL, NULL, NULL);
@@ -309,7 +337,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         }
     }
     Navigate();
+
     pwnd->ShowWindow(SW_SHOW);
+
     StartMessagePump();
     UnInitProcessPriv(NULL);
 

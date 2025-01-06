@@ -119,6 +119,9 @@ void InitControls() {
     waitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"WaitAnimation"));
     restartWaitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"RestartWaitAnimation"));
 
+    TouchButton* notes = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"notes"));
+    TouchButton* credits = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"credits"));
+
     TouchButton* Full = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"Full"));
     TouchButton* None = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"None"));
 
@@ -186,21 +189,17 @@ int ChangeSheet() {
 int InitInstaller() {
     if (!CheckVer(21343)) {
         err = -21343;
-        TaskDialog(NULL, NULL, L"no", L"unsupported", L"no", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        TaskDialog(NULL, NULL, L"no", L"no", L"unsupported on 10", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"This Windows Build is not supported. Windows 10 Build 21343 and above is required.", err);
         return err;
     }
-
-    GetCurrentDirectory(MAX_PATH, currdir);
-    std::wstring ws(currdir);
-    std::wstring fpath = ws + L"\\segoe_r11.ttf";
-    AddFontResource(fpath.c_str());
-
-    wchar_t windir[MAX_PATH];
-    GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
-
-    StringCchPrintf(r11dir, MAX_PATH, L"%s\\Rectify11", currdir);
-    StringCchPrintf(r11targetdir, MAX_PATH, L"%s\\Rectify11", windir);
+    if (!InternetCheckConnection(L"https://8.8.8.8/", FLAG_ICC_FORCE_CONNECTION, 0))
+    {
+        err = -69;
+        TaskDialog(NULL, NULL, L"no", L"no", L"internet needed", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        MainLogger.WriteLine(L"Rectify11 required active internet connection to be installed.", err);
+        return err;
+    }
 
     MainLogger.WriteLine(L"Initializing pages...\n\n\n");
     err = InitPages();

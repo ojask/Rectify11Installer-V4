@@ -32,7 +32,7 @@
 								<RichText class="progresstextbig" content="1" layoutpos="left"/>
 								<RichText class="progresstextsmall" content="Collecting information" layoutpos="left"/>
 								<RichText class="progresstextbig" content="2" layoutpos="left"/>
-								<RichText class="progresstextsmall" content="Installing Rectify11" layoutpos="left"/>
+								<RichText class="progresstextsmall" id="atom(useless)" content="Installing Rectify11" layoutpos="left"/>
 							</Element>
 						</Element>
 					</Element>

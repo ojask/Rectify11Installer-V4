@@ -6,6 +6,7 @@
 #include "Navigation.h"
 
 HRESULT err2 = 0;
+RichText* useless;
 
 int InitUninstPages() {
     for (int i = 1; i < MAXUNINSTPAGE; i++) {
@@ -69,6 +70,8 @@ void InitUninstControls() {
     Nxt->AddListener(new EventListener(NavNext));
     Bck->AddListener(new EventListener(NavBack));
 
+    useless = (RichText*)pMain->FindDescendent(StrToID((UCString)L"useless"));
+
     waitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"WaitAnimation"));
     restartWaitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"RestartWaitAnimation"));
 
@@ -94,17 +97,6 @@ int InitUninstaller() {
         return err2;
     }
 
-    GetCurrentDirectory(MAX_PATH, currdir);
-    std::wstring ws(currdir);
-    std::wstring fpath = ws + L"\\segoe_r11.ttf";
-    AddFontResource(fpath.c_str());
-
-    wchar_t windir[MAX_PATH];
-    GetEnvironmentVariable(L"systemroot", windir, MAX_PATH);
-
-    StringCchPrintf(r11dir, MAX_PATH, L"%s\\Rectify11", currdir);
-    StringCchPrintf(r11targetdir, MAX_PATH, L"%s\\Rectify11", windir);
-
     MainLogger.WriteLine(L"Initializing pages...\n\n\n");
     err2 = InitUninstPages();
     if (FAILED(err2)) {
@@ -113,6 +105,7 @@ int InitUninstaller() {
         return err2;
     }
     InitUninstControls();
+    useless->SetContentString((UCString)L"Uninstalling Rectify11");
     err2 = ChangeSheet();
     if (FAILED(err2)) {
         MainLogger.WriteLine(L"Failed to change stylesheet.", err2);

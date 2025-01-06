@@ -1,8 +1,0 @@
-%r11files%\Mods|%ProgramData%\Windhawk\Engine\Mods|NONE
-%r11files%\Rectify11|%systemroot%\Rectify11|INSTALLICONS
-%r11files%\System32|%systemroot%\System32|INSTALLICONS
-%r11files%\themes|%systemroot%\resources\themes|INSTALLTHEMES
-%r11files%\wallpapers|%systemroot%\web\wallpaper\rectified|INSTALLTHEMES
-%r11files%\cursors|%systemroot%\cursors|INSTALLTHEMES
-%r11files%\media|%systemroot%\media\rectified|INSTALLTHEMES
-%r11files%\SecureUxTheme|%systemroot%\System32|INSTALLTHEMES

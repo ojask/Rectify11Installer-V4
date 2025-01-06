@@ -1,8 +1,0 @@
-%r11files%\Regs\resourcepatch.reg|INSTALLICONS
-%r11files%\Regs\sound.reg|INSTALLTHEMES
-%r11files%\Regs\winmetricsfonts.reg|INSTALLTHEMES
-%r11files%\Regs\soundWH.reg|INSTALLTHEMES
-%r11files%\Regs\uxthemehook.reg|INSTALLTHEMES
-%r11files%\Regs\SecureUX.reg|INSTALLTHEMES
-%r11files%\Regs\Light.reg|LIGHTTHEME
-%r11files%\Regs\Dark.reg|DARKTHEME

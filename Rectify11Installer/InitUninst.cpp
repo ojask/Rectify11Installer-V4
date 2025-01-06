@@ -92,7 +92,7 @@ void InitUninstControls() {
 int InitUninstaller() {
     if (!CheckVer(21343)) {
         err2 = -21343;
-        TaskDialog(NULL, NULL, L"no", L"unsupported", L"no", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        TaskDialog(NULL, NULL, L"no", L"stop", L"unsupported on this windows version", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"This Windows Build is not supported. Windows 10 Build 21343 and above is required.", err2);
         return err2;
     }

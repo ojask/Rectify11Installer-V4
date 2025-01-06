@@ -189,14 +189,14 @@ int ChangeSheet() {
 int InitInstaller() {
     if (!CheckVer(21343)) {
         err = -21343;
-        TaskDialog(NULL, NULL, L"no", L"no", L"unsupported on 10", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        TaskDialog(NULL, NULL, L"no", L"stop", L"unsupported on this windows version", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"This Windows Build is not supported. Windows 10 Build 21343 and above is required.", err);
         return err;
     }
     if (!InternetCheckConnection(L"https://8.8.8.8/", FLAG_ICC_FORCE_CONNECTION, 0))
     {
         err = -69;
-        TaskDialog(NULL, NULL, L"no", L"no", L"internet needed", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
+        TaskDialog(NULL, NULL, L"no", L"stop", L"internet needed", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"Rectify11 required active internet connection to be installed.", err);
         return err;
     }

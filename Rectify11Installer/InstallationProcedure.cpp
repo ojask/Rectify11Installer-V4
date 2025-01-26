@@ -17,15 +17,14 @@ L"%r11files%\\SecureUxTheme|%systemroot%\\System32|INSTALLTHEMES"
 
 
 std::wstring install_list[] = {
-L"%r11files%\\windhawk_setup_offline.exe /S|NONE",
-L"%r11files%\\SymChk\\symchk.exe \"%systemroot%\\Explorer.exe\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE",
-L"%r11files%\\SymChk\\symchk.exe \"%systemroot%\\system32\\Shlwapi.dll\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE"
+L"\"%r11files%\\windhawk_setup_offline.exe\" /S|NONE",
+L"\"%r11files%\\SymChk\\symchk.exe\" \"%systemroot%\\Explorer.exe\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE",
+L"\"%r11files%\\SymChk\\symchk.exe\" \"%systemroot%\\system32\\Shlwapi.dll\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE"
 };
 
 std::wstring mod_list[] = {
 L"%r11files%\\Regs\\resourcepatch.reg|INSTALLICONS",
 L"%r11files%\\Regs\\sound.reg|INSTALLTHEMES",
-L"%r11files%\\Regs\\winmetricsfonts.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\soundWH.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\uxthemehook.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
@@ -206,23 +205,25 @@ void FinaliseInstall() {
 	wchar_t uninstallstr[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /v UninstallString /t REG_SZ /d \"%systemroot%\\Rectify11\\Rectify11Installer.exe\"";
 	RunEXE(path, uninstallstr);
 
-	StringCchPrintf(path, MAX_PATH, L"%s\\*", currdir);
+	StringCchPrintf(path, MAX_PATH, L"%s\\Base.dll", currdir);
+	StringCchPrintf(cmd, MAX_PATH, L"%s\\Base.dll", r11targetdir);
+	CopyFile(path, cmd, false);
 
-	HANDLE hFind;
-	WIN32_FIND_DATA FindFileData;
+	StringCchPrintf(path, MAX_PATH, L"%s\\Controls.dll", currdir);
+	StringCchPrintf(cmd, MAX_PATH, L"%s\\Controls.dll", r11targetdir);
+	CopyFile(path, cmd, false);
 
-	hFind = FindFirstFile(path, &FindFileData);
-	do {
-		if ((FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-			StringCchPrintf(path, MAX_PATH, L"%s\\%s", currdir, FindFileData.cFileName);
-			StringCchPrintf(cmd, MAX_PATH, L"%s\\%s", r11targetdir, FindFileData.cFileName);
-			if (wcsstr(FindFileData.cFileName, L".exe")) {
-				StringCchPrintf(cmd, MAX_PATH, L"%s\\Rectify11Installer.exe", r11targetdir);
-			}
-			CopyFile(path, cmd, false);
-		}
-	} while (FindNextFileW(hFind, &FindFileData));
+	StringCchPrintf(path, MAX_PATH, L"%s\\PageRes.dll", currdir);
+	StringCchPrintf(cmd, MAX_PATH, L"%s\\PageRes.dll", r11targetdir);
+	CopyFile(path, cmd, false);
 
+	StringCchPrintf(path, MAX_PATH, L"%s\\Rectify11Installer.exe", currdir);
+	StringCchPrintf(cmd, MAX_PATH, L"%s\\Rectify11Installer.exe", r11targetdir);
+	CopyFile(path, cmd, false);
+
+	StringCchPrintf(path, MAX_PATH, L"%s\\Segoe_r11.ttf", currdir);
+	StringCchPrintf(cmd, MAX_PATH, L"%s\\Segoe_r11.ttf", r11targetdir);
+	CopyFile(path, cmd, false);
 }
 
 void SetupComplete() {

@@ -1,0 +1,20 @@
+<duixml>
+	<HWNDHost resid="main" layout="filllayout()" background="window" layoutpos="client">
+		<HWNDHost resid="main" layout="filllayout()" background="window" layoutpos="client">
+			<Element layout="borderlayout()" padding="rect(5rp,5rp,5rp,0)" layoutpos="client">
+				<Richtext class="headertext" padding="rect(0,0,0,5rp)" layoutpos="top" font="14pt;Semibold;none;Segoe UI Variable Display" content="Consider supporting us by donating"/>
+				<TouchButton class="NormalButton" margin="rect(0,0,0,5rp)" id="atom(lix)" layoutpos="top" height="35rp" content="Lix (Designer, developer)"/>
+				<Richtext class="instructiontext" margin="rect(0,0,0,5rp)" layoutpos="top"
+			content="Thanks for using Rectify11, please consider donating, it would mean alot to us. Not all team members were able to have their donation method set up (including myself), we can't do much about it."/>
+				<Element layout="borderlayout()" padding="rect(0,0,10rp,10rp)" layoutpos="bottom">
+					<Element layout="flowlayout()" padding="rect(10rp,15rp,0,0)"  layoutpos="right">
+						<TouchButton class="AccentButton" id="atom(close)" height="35rp" width="140rp" content="Close"/>
+					</Element>
+					<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="right">
+						<TouchButton class="NormalButton" id="atom(discord)" height="35rp" content="Join our discord server"/>
+					</Element>
+				</Element>
+			</Element>
+		</HWNDHost>
+	</HWNDHost>
+</duixml>

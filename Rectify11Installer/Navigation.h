@@ -51,9 +51,6 @@ extern Element* progressbar;
 extern TouchButton* Nxt;
 extern TouchButton* Bck;
 
-extern TouchButton* notes;
-extern TouchButton* credits;
-
 extern Logger MainLogger;
 extern Logger NavLogger;
 extern Logger InstallationLogger;

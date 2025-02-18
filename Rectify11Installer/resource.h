@@ -61,7 +61,9 @@
 #define IDS_STRING140                   140
 #define IDR_UIFILE11                    140
 #define IDS_STRING141                   141
+#define IDR_UIFILE12                    141
 #define IDS_STRING142                   142
+#define IDR_UIFILE13                    142
 #define IDS_STRING143                   143
 #define IDS_STRING144                   144
 #define IDS_STRING145                   145
@@ -157,7 +159,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        141
+#define _APS_NEXT_RESOURCE_VALUE        143
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110

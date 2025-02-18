@@ -27,4 +27,8 @@ void HandleExplorerChk(Element* elem, Event* iev);
 
 void HandleIconChk(Element* elem, Event* iev);
 
+void OpenCredits(Element* elem, Event* iev);
+
+void OpenCoffee(Element* elem, Event* iev);
+
 #endif

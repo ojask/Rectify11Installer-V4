@@ -1,0 +1,28 @@
+<duixml>
+	<HWNDHost resid="main" layout="filllayout()" background="window" layoutpos="client">
+		<Element layout="borderlayout()" padding="rect(5rp,5rp,0,0)" layoutpos="client">
+			<Richtext class="headertext" layoutpos="top" font="14pt;Semibold;none;Segoe UI Variable Display" content="Team members"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Ojas (@ojask3804 on discord, Literally me lol)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="WinExperiments (@winexperiments on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Jess (@noname92850 on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Muffinized (@muffinized on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Misha (@mishaproductions on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Lix (@lixkote on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Firecube (@firecubestudios on discord)"/>
+			<Richtext class="instructiontext" layoutpos="top" content="Ahmed Walid (@ahmedwalid on discord)"/>
+			<Richtext class="headertext" layoutpos="top" padding="rect(0,10pt,0,0)" font="14pt;Semibold;none;Segoe UI Variable Display" content="Contributors"/>
+			<Richtext class="instructiontext" layoutpos="top" 
+			content="@aanjaneya_meaow, @mwquynhanh_, @myster.rainbow, @andre_goressi, @jimkoutso2008, @hateable., @mswinnt, @reallysoftuser, @rounk_, @rtfreal, @wildbydesign1, @pringles_0510, @mina354, @zero2su"/>
+			<Richtext class="instructiontext" layoutpos="top"
+			content="We appreciate the support of you guys, you all are awesome. If anyone feels like their name isn't listed here, then please message me on discord."/>
+			<Element layout="borderlayout()" padding="rect(0,0,10rp,10rp)" layoutpos="bottom">
+				<Element layout="flowlayout()" padding="rect(10rp,15rp,0,0)"  layoutpos="right">
+					<TouchButton class="AccentButton" id="atom(close)" height="35rp" width="140rp" content="Close"/>
+				</Element>
+				<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="right">
+					<TouchButton class="NormalButton" id="atom(discord)" height="35rp" content="Join our discord server"/>
+				</Element>
+			</Element>
+		</Element>
+	</HWNDHost>
+</duixml>

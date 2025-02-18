@@ -207,6 +207,7 @@
     <ClInclude Include="Initr11.h" />
     <ClInclude Include="InstallerEngine.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="MiscWindow.h" />
     <ClInclude Include="Navigation.h" />
     <ClInclude Include="Rectify11Installer.h" />
     <ClInclude Include="Resource.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Initr11.cpp" />
     <ClCompile Include="InstallerEngine.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="MiscWindow.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="Rectify11Installer.cpp" />
     <ClCompile Include="UninstallationProcedure.cpp" />
@@ -231,6 +233,8 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="coffee.xml" />
+    <Xml Include="credits.xml" />
     <Xml Include="Pages\1.xml" />
     <Xml Include="Pages\10.xml" />
     <Xml Include="Pages\2.xml" />

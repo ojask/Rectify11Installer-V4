@@ -11,6 +11,7 @@
 #include "Navigation.h"
 #include "InstallerEngine.h"
 #include "Logger.h"
+#include "MiscWindow.h"
 
 using namespace DirectUI;
 using namespace std;
@@ -157,6 +158,18 @@ void HandleIconChk(Element* elem, Event* iev) {
             tch->SetCheckedState(CheckedStateFlags_CHECKED);
             InstallFlags[L"INSTALLICONS"] = true;
         }
+    }
+}
+
+void OpenCredits(Element* elem, Event* iev) {
+    if (iev->type == TouchButton::Click) {
+        InitMiscWindow(false, pMain->GetSheet(), hinst);
+    }
+}
+
+void OpenCoffee(Element* elem, Event* iev) {
+    if (iev->type == TouchButton::Click) {
+        InitMiscWindow(true, pMain->GetSheet(), hinst);
     }
 }
 

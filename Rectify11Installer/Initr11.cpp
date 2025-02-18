@@ -119,7 +119,7 @@ void InitControls() {
     waitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"WaitAnimation"));
     restartWaitAnimation = (RichText*)pMain->FindDescendent(StrToID((UCString)L"RestartWaitAnimation"));
 
-    TouchButton* notes = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"notes"));
+    TouchButton* coffee = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"coffee"));
     TouchButton* credits = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"credits"));
 
     TouchButton* Full = (TouchButton*)pMain->FindDescendent(StrToID((UCString)L"Full"));
@@ -140,6 +140,8 @@ void InitControls() {
     Full->AddListener(new EventListener(NavFull));
     None->AddListener(new EventListener(NavNone));
 
+    coffee->AddListener(new EventListener(OpenCoffee));
+    credits->AddListener(new EventListener(OpenCredits));
 }
 
 
@@ -187,7 +189,7 @@ int ChangeSheet() {
 }
 
 int InitInstaller() {
-    if (!CheckVer(21343)) {
+    if (CheckVer(21343)) {
         err = -21343;
         TaskDialog(NULL, NULL, L"no", L"stop", L"unsupported on this windows version", TDCBF_OK_BUTTON, TD_ERROR_ICON, NULL);
         MainLogger.WriteLine(L"This Windows Build is not supported. Windows 10 Build 21343 and above is required.", err);

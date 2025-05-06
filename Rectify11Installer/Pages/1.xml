@@ -14,9 +14,6 @@
 				<Richtext class="instructiontext" foreground="rgb(236,64,78)" layoutpos="top"
 				content="Warning: This is a beta build of Rectify11, do NOT use it on your main PC."/>
 				<Element layout="borderlayout()" layoutpos="top">
-					<Element layout="flowlayout()" padding="rect(3rp,15rp,0,0)"  layoutpos="left">
-						<TouchButton class="NormalButton" id="atom(coffee)" height="35rp" width="140rp" content="Buy us a coffee"/>
-					</Element>
 					<Element layout="flowlayout()" padding="rect(10rp,15rp,0,0)"  layoutpos="left">
 						<TouchButton class="NormalButton" id="atom(credits)" height="35rp" width="140rp" content="Credits"/>
 					</Element>

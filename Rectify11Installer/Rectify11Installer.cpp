@@ -167,12 +167,6 @@ void OpenCredits(Element* elem, Event* iev) {
     }
 }
 
-void OpenCoffee(Element* elem, Event* iev) {
-    if (iev->type == TouchButton::Click) {
-        InitMiscWindow(true, pMain->GetSheet(), hinst);
-    }
-}
-
 void SetBackdrop() {
 
     MARGINS margins = { -1, -1, -1, -1 };

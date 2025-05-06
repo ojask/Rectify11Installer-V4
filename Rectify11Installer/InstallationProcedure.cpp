@@ -136,7 +136,7 @@ void InstallPrograms() {
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
 		if (InstallFlags[progpath[1]] == true) {
 			parseEnvironmentVariablePath(progpath[0]);
-			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
+			StringCchPrintf(cmd, 1024, L"/c %s", progpath[0].c_str());
 			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
 			RunEXE(path, cmd);
 		}

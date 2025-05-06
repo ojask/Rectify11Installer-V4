@@ -17,9 +17,9 @@ L"%r11files%\\SecureUxTheme|%systemroot%\\System32|INSTALLTHEMES"
 
 
 std::wstring install_list[] = {
-L"\"%r11files%\\windhawk_setup_offline.exe\" /S|NONE",
-L"\"%r11files%\\SymChk\\symchk.exe\" \"%systemroot%\\Explorer.exe\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE",
-L"\"%r11files%\\SymChk\\symchk.exe\" \"%systemroot%\\system32\\Shlwapi.dll\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE"
+L"%r11files%\\windhawk_setup_offline.exe /S|NONE",
+L"%r11files%\\SymChk\\symchk.exe \"%systemroot%\\Explorer.exe\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE",
+L"%r11files%\\SymChk\\symchk.exe \"%systemroot%\\system32\\Shlwapi.dll\" /s SRV*%programdata%\\Windhawk\\Engine\\symbols\\*http://msdl.microsoft.com/download/symbols|NONE"
 };
 
 std::wstring mod_list[] = {
@@ -30,6 +30,7 @@ L"%r11files%\\Regs\\uxthemehook.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\Light.reg|LIGHTTHEME",
 L"%r11files%\\Regs\\Dark.reg|DARKTHEME",
+L"%r11files%\\Regs\\fonts.reg|NONE"
 };
 
 
@@ -136,7 +137,7 @@ void InstallPrograms() {
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
 		if (InstallFlags[progpath[1]] == true) {
 			parseEnvironmentVariablePath(progpath[0]);
-			StringCchPrintf(cmd, 1024, L"/c %s", progpath[0].c_str());
+			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
 			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
 			RunEXE(path, cmd);
 		}

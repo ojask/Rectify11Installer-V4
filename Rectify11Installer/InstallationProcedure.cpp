@@ -7,12 +7,13 @@ wchar_t cmd[1024];
 std::wstring copy_list[] = {
 L"%r11files%\\Mods|%ProgramData%\\Windhawk\\Engine\\Mods|NONE",
 L"%r11files%\\Rectify11|%systemroot%\\Rectify11|INSTALLICONS",
-L"%r11files%\\System32|%systemroot%\\System32|INSTALLICONS",
+L"%r11files%\\System32|%systemroot%\\System32|NONE",
 L"%r11files%\\themes|%systemroot%\\resources\\themes|INSTALLTHEMES",
 L"%r11files%\\wallpapers|%systemroot%\\web\\wallpaper\\rectified|INSTALLTHEMES",
 L"%r11files%\\cursors|%systemroot%\\cursors|INSTALLTHEMES",
 L"%r11files%\\media|%systemroot%\\media\\rectified|INSTALLTHEMES",
-L"%r11files%\\SecureUxTheme|%systemroot%\\System32|INSTALLTHEMES"
+L"%r11files%\\SecureUxTheme\\arm64|%systemroot%\\System32|INSTALLTHEMES|ARM64"
+L"%r11files%\\SecureUxTheme\\amd64|%systemroot%\\System32|INSTALLTHEMES|AMD64"
 };
 
 
@@ -23,10 +24,11 @@ L"%r11files%\\SymChk\\symchk.exe \"%systemroot%\\system32\\Shlwapi.dll\" /s SRV*
 };
 
 std::wstring mod_list[] = {
-L"%r11files%\\Regs\\resourcepatch.reg|INSTALLICONS",
+L"%r11files%\\Regs\\resourcepatch.reg|INSTALLICONS|AMD64",
+L"%r11files%\\Regs\\resourcepatchARM.reg|INSTALLICONS|ARM64",
 L"%r11files%\\Regs\\sound.reg|INSTALLTHEMES",
-L"%r11files%\\Regs\\soundWH.reg|INSTALLTHEMES",
-L"%r11files%\\Regs\\uxthemehook.reg|INSTALLTHEMES",
+L"%r11files%\\Regs\\soundWH.reg|INSTALLTHEMES|AMD64",
+L"%r11files%\\Regs\\soundWHARM.reg|INSTALLTHEMES|ARM64",
 L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\Light.reg|LIGHTTHEME",
 L"%r11files%\\Regs\\Dark.reg|DARKTHEME",
@@ -122,8 +124,16 @@ void MoveFilesToTarget() {
 			for (int i = 0; i < pathlist.size(); i++) {
 				parseEnvironmentVariablePath(pathlist[i]);
 			}
-			InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
-			MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
+			if (pathlist.size() > 3) {
+				if (InstallFlags[pathlist[3]] == true) {
+					InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
+					MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
+				}
+			}
+			else {
+				InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
+				MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
+			}
 		}
 	}
 }
@@ -135,7 +145,7 @@ void InstallPrograms() {
 	for (int i = 0; i < (sizeof(install_list) / sizeof(std::wstring)); i++) {
 		ws = install_list[i];
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
-		if (InstallFlags[progpath[1]] == true) {
+		if (InstallFlags[progpath[1]] == true){
 			parseEnvironmentVariablePath(progpath[0]);
 			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
 			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
@@ -171,7 +181,14 @@ void RegisterWHMods() {
 		std::vector<std::wstring> regpath(ParseDelimiterString(ws));
 		if (InstallFlags[regpath[1]] == true) {
 			parseEnvironmentVariablePath(regpath[0]);
-			RegisterRegFile(regpath[0].c_str());
+			if (regpath.size() > 2) {
+				if (InstallFlags[regpath[2]] == true) {
+					RegisterRegFile(regpath[0].c_str());
+				}
+			}
+			else {
+				RegisterRegFile(regpath[0].c_str());
+			}
 		}
 	}
 }

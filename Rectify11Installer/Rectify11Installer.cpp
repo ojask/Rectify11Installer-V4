@@ -161,12 +161,6 @@ void HandleIconChk(Element* elem, Event* iev) {
     }
 }
 
-void OpenCredits(Element* elem, Event* iev) {
-    if (iev->type == TouchButton::Click) {
-        InitMiscWindow(false, pMain->GetSheet(), hinst);
-    }
-}
-
 void SetBackdrop() {
 
     MARGINS margins = { -1, -1, -1, -1 };
@@ -177,6 +171,14 @@ void SetBackdrop() {
         DwmSetWindowAttribute(pwnd->GetHWND(), DWMWA_USE_HOSTBACKDROPBRUSH, &value, sizeof(value));
         DWM_SYSTEMBACKDROP_TYPE backdrop_type = DWMSBT_TABBEDWINDOW;
         DwmSetWindowAttribute(pwnd->GetHWND(), DWMWA_SYSTEMBACKDROP_TYPE, &backdrop_type, sizeof(backdrop_type));
+    }
+}
+
+
+void OpenCredits(Element* elem, Event* iev) {
+    if (iev->type == TouchButton::Click) {
+
+        InitMiscWindow(false, pMain->GetSheet(), hinst);
     }
 }
 
@@ -235,6 +237,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     InstallFlags[L"NONE"] = true;
     InstallFlags[L"INSTALLICONS"] = true;
     InstallFlags[L"INSTALLTHEMES"] = true;
+    InstallFlags[L"AMD64"] = true;
+    InstallFlags[L"ARM64"] = false;
+
+    USHORT processMachine = 0;
+    USHORT nativeMachine = 0;
+
+    HANDLE hProcess = GetCurrentProcess();
+
+    if (IsWow64Process2(hProcess, &processMachine, &nativeMachine)) {
+        switch (nativeMachine) {
+        case IMAGE_FILE_MACHINE_AMD64: {
+            InstallFlags[L"AMD64"] = true;
+            InstallFlags[L"ARM64"] = false;
+            break;
+        }
+        case IMAGE_FILE_MACHINE_ARM64: {
+            InstallFlags[L"AMD64"] = false;
+            InstallFlags[L"ARM64"] = true;
+            break;
+        }
+        }
+    }
 
     HRESULT err = 0;
     GetCurrentDirectory(MAX_PATH, currdir);

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "resource.h"
 #include "MiscWindow.h"
+#include "Initr11.h"
 #include "DirectUI/DirectUI.h"
 using namespace DirectUI;
 
@@ -48,6 +49,9 @@ void InitMiscWindow(bool coffee, StyleSheet* ssheet, HINSTANCE hInstance) {
     (pMain->FindDescendent(StrToID((UCString)L"close")))->AddListener(new EventListener(closeWnd));
 
     (pMain->FindDescendent(StrToID((UCString)L"discord")))->AddListener(new EventListener(joinDsc));
+
+    BOOL value = TRUE;
+    if (!GetUserAppMode())DwmSetWindowAttribute(wnd->GetHWND(), DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
 
     wnd->ShowWindow(SW_SHOW);
 }

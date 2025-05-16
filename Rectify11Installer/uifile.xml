@@ -48,6 +48,9 @@
 					<Element alpha="255" animation="alpha|position|log|fast"/>
 				</if>
 			</if>
+			<if class="miscbg">
+				<Element background="rgb(255,255,255)"/>
+			</if>
 			<if id="atom(WaitAnimation)">
 				<Richtext foreground="rgb(0,95,184)"/>
 			</if>
@@ -191,6 +194,9 @@
 				<if visible="true">
 					<Element alpha="255" animation="alpha|position|log|fast"/>
 				</if>
+			</if>
+			<if class="miscbg">
+				<Element background="rgb(44,44,44)"/>
 			</if>
 			<if id="atom(WaitAnimation)">
 				<Richtext foreground="rgb(96,205,255)"/>

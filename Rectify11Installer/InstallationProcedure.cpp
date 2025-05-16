@@ -12,8 +12,7 @@ L"%r11files%\\themes|%systemroot%\\resources\\themes|INSTALLTHEMES",
 L"%r11files%\\wallpapers|%systemroot%\\web\\wallpaper\\rectified|INSTALLTHEMES",
 L"%r11files%\\cursors|%systemroot%\\cursors|INSTALLTHEMES",
 L"%r11files%\\media|%systemroot%\\media\\rectified|INSTALLTHEMES",
-L"%r11files%\\SecureUxTheme\\arm64|%systemroot%\\System32|INSTALLTHEMES|ARM64"
-L"%r11files%\\SecureUxTheme\\amd64|%systemroot%\\System32|INSTALLTHEMES|AMD64"
+L"%r11files%\\SecureUxTheme|%systemroot%\\System32\\SecureUX|INSTALLTHEMES"
 };
 
 
@@ -29,7 +28,8 @@ L"%r11files%\\Regs\\resourcepatchARM.reg|INSTALLICONS|ARM64",
 L"%r11files%\\Regs\\sound.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\soundWH.reg|INSTALLTHEMES|AMD64",
 L"%r11files%\\Regs\\soundWHARM.reg|INSTALLTHEMES|ARM64",
-L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
+L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES|AMD64",
+L"%r11files%\\Regs\\SecureUXARM.reg|INSTALLTHEMES|ARM64",
 L"%r11files%\\Regs\\Light.reg|LIGHTTHEME",
 L"%r11files%\\Regs\\Dark.reg|DARKTHEME",
 L"%r11files%\\Regs\\fonts.reg|NONE"
@@ -125,16 +125,9 @@ void MoveFilesToTarget() {
 			for (int i = 0; i < pathlist.size(); i++) {
 				parseEnvironmentVariablePath(pathlist[i]);
 			}
-			if (pathlist.size() > 3) {
-				if (InstallFlags[pathlist[3]] == true) {
-					InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
-					MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
-				}
-			}
-			else {
-				InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
-				MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
-			}
+			InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
+			MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
+			
 		}
 	}
 }

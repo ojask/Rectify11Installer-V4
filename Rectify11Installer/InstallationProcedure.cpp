@@ -148,9 +148,18 @@ void InstallPrograms() {
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
 		if (InstallFlags[progpath[1]] == true){
 			parseEnvironmentVariablePath(progpath[0]);
-			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
-			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-			RunEXE(path, cmd);
+			if (progpath.size() > 2) {
+				if (InstallFlags[progpath[2]] == true) {
+					StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
+					StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+					RunEXE(path, cmd);
+				}
+			}
+			else {
+				StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
+				StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+				RunEXE(path, cmd);
+			}
 		}
 	}
 }
@@ -182,7 +191,14 @@ void RegisterWHMods() {
 		std::vector<std::wstring> regpath(ParseDelimiterString(ws));
 		if (InstallFlags[regpath[1]] == true) {
 			parseEnvironmentVariablePath(regpath[0]);
-			RegisterRegFile(regpath[0].c_str());
+			if (regpath.size() > 2) {
+				if (InstallFlags[regpath[2]] == true) {
+					RegisterRegFile(regpath[0].c_str());
+				}
+			}
+			else {
+				RegisterRegFile(regpath[0].c_str());
+			}
 		}
 	}
 }

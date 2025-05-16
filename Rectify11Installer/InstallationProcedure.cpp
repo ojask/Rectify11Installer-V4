@@ -120,20 +120,16 @@ void MoveFilesToTarget() {
 	for (int i = 0; i < (sizeof(copy_list) / sizeof(std::wstring)); i++) {
 		ws = copy_list[i];
 		std::vector<std::wstring> pathlist(ParseDelimiterString(ws));
-		if (InstallFlags[pathlist[2]] == true) {
-			for (int i = 0; i < pathlist.size(); i++) {
-				parseEnvironmentVariablePath(pathlist[i]);
+		bool alltrue = true;
+		for (int j = 2; j < pathlist.size(); j++) {
+			if (InstallFlags[pathlist[j]] == false) { alltrue = false; break; }
+		}
+		if (alltrue) {
+			for (int j = 0; j < pathlist.size(); j++) {
+				parseEnvironmentVariablePath(pathlist[j]);
 			}
-			if (pathlist.size() > 3) {
-				if (InstallFlags[pathlist[3]] == true) {
-					InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
-					MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
-				}
-			}
-			else {
-				InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
-				MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
-			}
+			InstallationLogger.WriteLine(L"Copying files \"" + pathlist[0] + L"\" to \"" + pathlist[1] + L"\" based on condition \"" + pathlist[2] + L"\"");
+			MoveFileCmd(pathlist[0].c_str(), pathlist[1].c_str());
 		}
 	}
 }
@@ -145,7 +141,11 @@ void InstallPrograms() {
 	for (int i = 0; i < (sizeof(install_list) / sizeof(std::wstring)); i++) {
 		ws = install_list[i];
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
-		if (InstallFlags[progpath[1]] == true){
+		bool alltrue = true;
+		for (int j = 1; j < progpath.size(); j++) {
+			if (InstallFlags[progpath[j]] == false) { alltrue = false; break; }
+		}
+		if (alltrue){
 			parseEnvironmentVariablePath(progpath[0]);
 			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
 			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
@@ -179,16 +179,13 @@ void RegisterWHMods() {
 	for (int i = 0; i < (sizeof(mod_list) / sizeof(std::wstring)); i++) {
 		ws = mod_list[i];
 		std::vector<std::wstring> regpath(ParseDelimiterString(ws));
-		if (InstallFlags[regpath[1]] == true) {
+		bool alltrue = true;
+		for (int j = 1; j < regpath.size(); j++) {
+			if (InstallFlags[regpath[j]] == false) { alltrue = false; break; }
+		}
+		if (alltrue) {
 			parseEnvironmentVariablePath(regpath[0]);
-			if (regpath.size() > 2) {
-				if (InstallFlags[regpath[2]] == true) {
-					RegisterRegFile(regpath[0].c_str());
-				}
-			}
-			else {
-				RegisterRegFile(regpath[0].c_str());
-			}
+			RegisterRegFile(regpath[0].c_str());
 		}
 	}
 }

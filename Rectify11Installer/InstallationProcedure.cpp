@@ -63,7 +63,7 @@ void RunEXE(wchar_t exe[], wchar_t args[]) {
 
 void extractFiles() {
 
-	StringCchPrintf(cmd, 1024, L"\"%s\\7z.exe\" x -aoa -o\"%s\" \"%s\\Files.7z\"", r11dir, r11dir, r11dir);
+	StringCchPrintf(cmd, 1024, L"\"%s\\7z.exe\" x -aoa -o\"%s\" \"%s\\Files.7z\" -y", r11dir, r11dir, r11dir);
 	InstallationLogger.WriteLine(L"Extracting files...");
 	RunEXE(NULL, cmd);
 }
@@ -122,7 +122,7 @@ void MoveFilesToTarget() {
 		std::vector<std::wstring> pathlist(ParseDelimiterString(ws));
 		bool alltrue = true;
 		for (int j = 2; j < pathlist.size(); j++) {
-			if (InstallFlags[pathlist[i]] == false) { alltrue = false; break; }
+			if (InstallFlags[pathlist[j]] == false) { alltrue = false; break; }
 		}
 		if (alltrue) {
 			for (int j = 0; j < pathlist.size(); j++) {
@@ -144,7 +144,7 @@ void InstallPrograms() {
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
 		bool alltrue = true;
 		for (int j = 1; j < progpath.size(); j++) {
-			if (InstallFlags[progpath[i]] == false) { alltrue = false; break; }
+			if (InstallFlags[progpath[j]] == false) { alltrue = false; break; }
 		}
 		if (alltrue) {
 			parseEnvironmentVariablePath(progpath[0]);
@@ -183,7 +183,7 @@ void RegisterWHMods() {
 		std::vector<std::wstring> regpath(ParseDelimiterString(ws));
 		bool alltrue = true;
 		for (int j = 1; j < regpath.size(); j++) {
-			if (InstallFlags[regpath[i]] == false) { alltrue = false; break; }
+			if (InstallFlags[regpath[j]] == false) { alltrue = false; break; }
 		}
 		if (alltrue) {
 			parseEnvironmentVariablePath(regpath[0]);

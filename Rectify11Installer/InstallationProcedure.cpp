@@ -11,7 +11,9 @@ L"%r11files%\\System32|%systemroot%\\System32|NONE",
 L"%r11files%\\themes|%systemroot%\\resources\\themes|INSTALLTHEMES",
 L"%r11files%\\wallpapers|%systemroot%\\web\\wallpaper\\rectified|INSTALLTHEMES",
 L"%r11files%\\cursors|%systemroot%\\cursors|INSTALLTHEMES",
-L"%r11files%\\media|%systemroot%\\media\\rectified|INSTALLTHEMES"
+L"%r11files%\\media|%systemroot%\\media\\rectified|INSTALLTHEMES",
+L"%r11files%\\SecureUxTheme-amd64|%systemroot%\\System32|INSTALLTHEMES|AMD64",
+L"%r11files%\\SecureUxTheme-arm64|%systemroot%\\System32|INSTALLTHEMES|ARM64",
 };
 
 
@@ -27,8 +29,7 @@ L"%r11files%\\Regs\\resourcepatchARM.reg|INSTALLICONS|ARM64",
 L"%r11files%\\Regs\\sound.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\soundWH.reg|INSTALLTHEMES|AMD64",
 L"%r11files%\\Regs\\soundWHARM.reg|INSTALLTHEMES|ARM64",
-L"%r11files%\\Regs\\uxtheme.reg|INSTALLTHEMES|AMD64",
-L"%r11files%\\Regs\\uxthemeARM.reg|INSTALLTHEMES|ARM64",
+L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\Light.reg|LIGHTTHEME",
 L"%r11files%\\Regs\\Dark.reg|DARKTHEME",
 L"%r11files%\\Regs\\fonts.reg|NONE"
@@ -119,8 +120,11 @@ void MoveFilesToTarget() {
 	for (int i = 0; i < (sizeof(copy_list) / sizeof(std::wstring)); i++) {
 		ws = copy_list[i];
 		std::vector<std::wstring> pathlist(ParseDelimiterString(ws));
-
-		if (InstallFlags[pathlist[2]] == true) {
+		bool alltrue = true;
+		for (int j = 2; j < pathlist.size(); j++) {
+			if (InstallFlags[pathlist[i]] == false) { alltrue = false; break; }
+		}
+		if (alltrue) {
 			for (int j = 0; j < pathlist.size(); j++) {
 				parseEnvironmentVariablePath(pathlist[j]);
 			}
@@ -138,20 +142,16 @@ void InstallPrograms() {
 	for (int i = 0; i < (sizeof(install_list) / sizeof(std::wstring)); i++) {
 		ws = install_list[i];
 		std::vector<std::wstring> progpath(ParseDelimiterString(ws));
-		if (InstallFlags[progpath[1]] == true){
+		bool alltrue = true;
+		for (int j = 1; j < progpath.size(); j++) {
+			if (InstallFlags[progpath[i]] == false) { alltrue = false; break; }
+		}
+		if (alltrue) {
 			parseEnvironmentVariablePath(progpath[0]);
-			if (progpath.size() > 2) {
-				if (InstallFlags[progpath[2]] == true) {
-					StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
-					StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-					RunEXE(path, cmd);
-				}
-			}
-			else {
-				StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
-				StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-				RunEXE(path, cmd);
-			}
+
+			StringCchPrintf(cmd, 1024, L"/c \"%s\"", progpath[0].c_str());
+			StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+			RunEXE(path, cmd);
 		}
 	}
 }
@@ -181,16 +181,13 @@ void RegisterWHMods() {
 	for (int i = 0; i < (sizeof(mod_list) / sizeof(std::wstring)); i++) {
 		ws = mod_list[i];
 		std::vector<std::wstring> regpath(ParseDelimiterString(ws));
-		if (InstallFlags[regpath[1]] == true) {
+		bool alltrue = true;
+		for (int j = 1; j < regpath.size(); j++) {
+			if (InstallFlags[regpath[i]] == false) { alltrue = false; break; }
+		}
+		if (alltrue) {
 			parseEnvironmentVariablePath(regpath[0]);
-			if (regpath.size() > 2) {
-				if (InstallFlags[regpath[2]] == true) {
-					RegisterRegFile(regpath[0].c_str());
-				}
-			}
-			else {
-				RegisterRegFile(regpath[0].c_str());
-			}
+			RegisterRegFile(regpath[0].c_str());
 		}
 	}
 }

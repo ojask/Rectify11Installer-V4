@@ -14,12 +14,6 @@ void RemoveWHMods() {
 		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
 		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\logon-logoff-shutdown-sounds /f";
 		RunEXE(exepath, args);
-
-		InstallationLogger.WriteLine(L"Uninstalling uxtheme hook...");
-
-		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
-		wchar_t args2[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\uxtheme-hook /f";
-		RunEXE(exepath, args2);
 	}
 	if (InstallFlags[L"INSTALLICONS"] == true) {
 
@@ -44,6 +38,21 @@ void RemoveSecureUX() {
 		wchar_t args2[] = L"/c reg delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\winlogon.exe\" /f /v VerifierDlls";
 		RunEXE(exepath, args2);
 
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args3[] = L"/c reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\LogonUI.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args3);
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args4[] = L"/c reg delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\LogonUI.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args4);
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args5[] = L"/c reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SystemSettings.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args5);
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args6[] = L"/c reg delete \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SystemSettings.exe\" /f /v VerifierDlls";
+		RunEXE(exepath, args6);
 	}
 }
 

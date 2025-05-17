@@ -29,6 +29,14 @@ void RemoveWHMods() {
 		wchar_t args[] = L"/c reg delete HKLM\\SOFTWARE\\Windhawk\\Engine\\Mods\\icon-resource-redirect /f";
 		RunEXE(exepath, args);
 	}
+	if (InstallFlags[L"INSTALLASDF"] == true) {
+
+		InstallationLogger.WriteLine(L"Uninstalling Accent Colorizer...");
+
+		StringCchPrintf(exepath, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+		wchar_t args[] = L"/c reg delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run /v ASDF /f";
+		RunEXE(exepath, args);
+	}
 }
 
 void RemoveSecureUX() {

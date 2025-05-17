@@ -126,8 +126,14 @@ void HandleThemesChk(Element* elem, Event* iev) {
 void HandleAsdfChk(Element* elem, Event* iev) {
     TouchCheckBox* tch = (TouchCheckBox*)elem;
     if (iev->type == TouchButton::Click) {
-        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) tch->SetCheckedState(CheckedStateFlags_NONE);
-        else tch->SetCheckedState(CheckedStateFlags_CHECKED);
+        if (tch->GetCheckedState() == CheckedStateFlags_CHECKED) { 
+            tch->SetCheckedState(CheckedStateFlags_NONE); 
+            InstallFlags[L"INSTALLASDF"] = false;
+        }
+        else { 
+            tch->SetCheckedState(CheckedStateFlags_CHECKED); 
+            InstallFlags[L"INSTALLASDF"] = true;
+        }
     }
 }
 
@@ -237,6 +243,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     InstallFlags[L"NONE"] = true;
     InstallFlags[L"INSTALLICONS"] = true;
     InstallFlags[L"INSTALLTHEMES"] = true;
+    InstallFlags[L"INSTALLASDF"] = true;
     InstallFlags[L"AMD64"] = true;
     InstallFlags[L"ARM64"] = false;
 

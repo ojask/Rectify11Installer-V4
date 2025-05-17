@@ -34,7 +34,8 @@ L"%r11files%\\Regs\\uxthemehookARM.reg|INSTALLTHEMES|ARM64",
 L"%r11files%\\Regs\\SecureUX.reg|INSTALLTHEMES",
 L"%r11files%\\Regs\\Light.reg|LIGHTTHEME",
 L"%r11files%\\Regs\\Dark.reg|DARKTHEME",
-L"%r11files%\\Regs\\fonts.reg|NONE"
+L"%r11files%\\Regs\\fonts.reg|NONE",
+L"%r11files%\\Regs\\ASDF.reg|INSTALLASDF"
 };
 
 

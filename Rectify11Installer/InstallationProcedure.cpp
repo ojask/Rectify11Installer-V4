@@ -207,7 +207,7 @@ void FinaliseInstall() {
 	wchar_t name[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /v DisplayName /t REG_SZ /d Rectify11";
 	RunEXE(path, name);
 
-	wchar_t version[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /v DisplayVersion /t REG_SZ /d 3.9.6";
+	wchar_t version[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /v DisplayVersion /t REG_SZ /d 3.9.7";
 	RunEXE(path, version);
 
 	wchar_t location[] = L"/c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Rectify /v InstallLocation /t REG_SZ /d %systemroot%\\Rectify11";

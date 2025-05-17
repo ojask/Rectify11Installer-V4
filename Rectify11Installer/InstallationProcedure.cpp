@@ -63,7 +63,7 @@ void RunEXE(wchar_t exe[], wchar_t args[]) {
 
 void extractFiles() {
 
-	StringCchPrintf(cmd, 1024, L"\"%s\\7za.exe\" x -aoa -o\"%s\" \"%s\\Files.7z\"", r11dir, r11dir, r11dir);
+	StringCchPrintf(cmd, 1024, L"\"%s\\7z.exe\" x -aoa -o\"%s\" \"%s\\Files.7z\"", r11dir, r11dir, r11dir);
 	InstallationLogger.WriteLine(L"Extracting files...");
 	RunEXE(NULL, cmd);
 }

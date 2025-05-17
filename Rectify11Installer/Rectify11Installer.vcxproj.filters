@@ -265,10 +265,13 @@
     <None Include="Base.dll">
       <Filter>Resource Files\Dll</Filter>
     </None>
-    <None Include="Rectify11\7za.exe">
+    <None Include="Rectify11\Files.7z">
       <Filter>Resource Files\Rectify11</Filter>
     </None>
-    <None Include="Rectify11\Files.7z">
+    <None Include="Rectify11\7z.dll">
+      <Filter>Resource Files\Rectify11</Filter>
+    </None>
+    <None Include="Rectify11\7z.exe">
       <Filter>Resource Files\Rectify11</Filter>
     </None>
   </ItemGroup>

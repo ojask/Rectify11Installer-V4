@@ -55,7 +55,7 @@ void RunEXE(wchar_t exe[], wchar_t args[]) {
 	if (rv) {
 		InstallationLogger.WriteLine(L"Created process successfully.");
 		CloseHandle(process_info.hThread);
-		WaitForSingleObject(process_info.hProcess, INFINITE);
+		WaitForSingleObject(process_info.hProcess, 60000*5);
 		CloseHandle(process_info.hProcess);
 		InstallationLogger.WriteLine(L"Process completed successfully");
 	}

@@ -90,39 +90,11 @@ void parseEnvironmentVariablePath(std::wstring& path) {
 	}
 }
 
-bool CopyFileWithOverwrite(const wchar_t* src, const wchar_t* dest) {
-	return CopyFileW(src, dest, FALSE);
-}
-
-bool CopyFolder(const wchar_t* srcFolder, const wchar_t* destFolder) {
-	wchar_t src[MAX_PATH];
-	wchar_t dest[MAX_PATH]; 
-	StringCchPrintfW(src, MAX_PATH, L"%s\0\0", srcFolder);
-	StringCchPrintfW(dest, MAX_PATH, L"%s\0\0", destFolder);
-
-	SHFILEOPSTRUCTW file_operation = { 0 };
-	file_operation.wFunc = FO_COPY;
-	file_operation.pFrom = src;
-	file_operation.pTo = dest;
-	file_operation.fFlags = FOF_NO_UI;
-
-	return SHFileOperation(&file_operation) == 0;
-}
-
 void MoveFileCmd(const wchar_t* src, const wchar_t* dest) {
 
-	DWORD attr = GetFileAttributes(src);
-	if (attr & FILE_ATTRIBUTE_DIRECTORY) {
-		if (!CopyFolder(src, dest)) {
-			InstallationLogger.WriteLine(L"Failed to copy folder from " + std::wstring(src) + L" to " + std::wstring(dest));
-		}
-	}
-	else {
-		if (!CopyFileWithOverwrite(src, dest)) {
-			InstallationLogger.WriteLine(L"Failed to copy file from " + std::wstring(src) + L" to " + std::wstring(dest));
-		}
-	}
-
+	StringCchPrintf(cmd, 1024, L"/c echo d | xcopy \"%s\" \"%s\" /e /y", src, dest);
+	StringCchPrintf(path, MAX_PATH, L"%s\\System32\\cmd.exe", windir);
+	RunEXE(path, cmd);
 }
 
 void RegisterRegFile(const wchar_t* regpath) {

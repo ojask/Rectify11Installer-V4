@@ -8,6 +8,7 @@ using namespace std;
 class Logger {
 private:
 	wfstream logfile;
+	std::mutex mutex;
 public:
 	void StartLogger(const wchar_t* filename);
 	void WriteLine(wstring line);

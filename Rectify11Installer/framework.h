@@ -21,6 +21,7 @@
 #include <codecvt>
 #include <fstream>
 #include <locale>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <vector>

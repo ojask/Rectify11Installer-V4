@@ -23,6 +23,8 @@ public:
 	static atomic<int> progressnum;
 	static atomic<int> Ttime;
 	static wstring currprogress;
+	static std::mutex progressMutex;
+	static std::mutex logMutex;
 	void StartThread(unsigned long (*func)(LPVOID lpParam));
 	void StopThread();
 	static unsigned long BeginMainAnim(LPVOID lpParam);
@@ -30,5 +32,4 @@ public:
 	static unsigned long BeginInstall(LPVOID lpParam);
 	static unsigned long BeginUninstall(LPVOID lpParam);
 	static unsigned long BeginRestartCountdown(LPVOID lpParam);
-	static void LogWriter(wfstream& wfs, wstring ws);
 };

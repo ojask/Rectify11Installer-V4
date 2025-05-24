@@ -20,11 +20,19 @@ void Logger::StartLogger(const wchar_t* filename) {
 }
 
 void Logger::WriteLine(wstring line) {
-	if(logfile.good())logfile << line << endl;
+	std::lock_guard<std::mutex> lock(mutex);
+	if (logfile.is_open()) { 
+		logfile << line << endl;
+		logfile.flush();
+	}
 }
 
 void Logger::WriteLine(wstring line, int exitCode) {
-	logfile << line << L" (exit code: " << to_wstring(exitCode) << L")" << endl;
+	std::lock_guard<std::mutex> lock(mutex);
+	if (logfile.is_open()) { 
+		logfile << line << L" (exit code: " << to_wstring(exitCode) << L")" << endl; 
+		logfile.flush();
+	}
 }
 
 Logger::~Logger() {

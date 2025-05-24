@@ -10,11 +10,13 @@ using namespace DirectUI;
 std::atomic_bool IEngineWrapper::animate = true;
 std::atomic<int> IEngineWrapper::progressnum = 0;
 std::atomic<int> IEngineWrapper::Ttime = 30;
-std::wstring IEngineWrapper::currprogress = L"";
+std::wstring IEngineWrapper::currprogress;
+std::mutex IEngineWrapper::progressMutex;
+std::mutex IEngineWrapper::logMutex;
 
 unsigned long IEngineWrapper::BeginMainAnim(LPVOID lpParam) {
     while (animate.load()) {
-        SendMessage(pwnd->GetHWND(), WM_UPDATEANIMATIONFRAME, NULL, NULL);
+        PostMessage(pwnd->GetHWND(), WM_UPDATEANIMATIONFRAME, NULL, NULL);
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
     ExitThread(0);
@@ -22,59 +24,84 @@ unsigned long IEngineWrapper::BeginMainAnim(LPVOID lpParam) {
 
 unsigned long IEngineWrapper::BeginRestartAnim(LPVOID lpParam) {
     while (animate.load()) {
-        SendMessage(pwnd->GetHWND(), WM_UPDATERESTARTANIMATIONFRAME, NULL, NULL);
+        PostMessage(pwnd->GetHWND(), WM_UPDATERESTARTANIMATIONFRAME, NULL, NULL);
         std::this_thread::sleep_for(std::chrono::milliseconds(20));
     }
     ExitThread(0);
 }
 
 unsigned long IEngineWrapper::BeginInstall(LPVOID lpParam){
-    std::wstring ws;
 
-    currprogress = L"Extracting files...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Extracting files...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     extractFiles();
-    currprogress = L"Copying files...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Copying files...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     MoveFilesToTarget();
-    currprogress = L"Installing fonts...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Installing fonts...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     InstallFonts();
-    currprogress = L"Installing Programs...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Installing Programs...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     InstallPrograms();
-    currprogress = L"Installing Tweaks...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Installing Tweaks...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     RegisterWHMods();
-    currprogress = L"Finishing Installation...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Finishing Installation...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     FinaliseInstall();
      
-    SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
+    PostMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
     ExitThread(0);
 }
 
 unsigned long IEngineWrapper::BeginUninstall(LPVOID lpParam) {
 
-    currprogress = L"Uninstalling...";
-    SendMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
+    {
+        std::lock_guard<std::mutex> lock(progressMutex);
+        currprogress = L"Uninstalling...";
+    }
+    PostMessage(pwnd->GetHWND(), WM_UPDATEPROGRESS, NULL, NULL);
     RemoveWHMods();
     RemoveSecureUX();
     FinaliseUninstall();
-    SendMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
+    PostMessage(pwnd->GetHWND(), WM_SETUPCOMPLETE, NULL, NULL);
     ExitThread(0);
 }
 
 unsigned long IEngineWrapper::BeginRestartCountdown(LPVOID lpParam) {
     int i = 30;
     while (Ttime.load() >= 0 && animate.load()) {
-            SendMessage(pwnd->GetHWND(), WM_UPDATECOUNTDOWN, NULL, NULL);
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            i--;
-            Ttime.store(i);
+        PostMessage(pwnd->GetHWND(), WM_UPDATECOUNTDOWN, NULL, NULL);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        i--;
+        Ttime.store(i);
     }
     SetupComplete();
-    SendMessage(pwnd->GetHWND(), WM_DESTROY, NULL, NULL);
+    PostMessage(pwnd->GetHWND(), WM_DESTROY, NULL, NULL);
     ExitThread(0);
 }
 
@@ -86,8 +113,5 @@ void IEngineWrapper::StartThread(unsigned long (*func)(LPVOID lpParam)) {
 
 void IEngineWrapper::StopThread() {
     animate.store(false);
-}
-
-void IEngineWrapper::LogWriter(wfstream& wfs, wstring ws) {
-    wfs << ws << endl;
+    CloseHandle(ienThread);
 }

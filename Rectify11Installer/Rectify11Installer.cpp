@@ -210,6 +210,7 @@ LRESULT CALLBACK SubclassWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
             restartWaitAnimation->SetValue(RichText::ContentProp, 2, V);
             currframe++;
             if (currframe == 230) currframe = 112;
+            break;
         }
         case WM_UPDATEPROGRESS: {
             progressmeter->SetContentString((UCString)IEngineWrapper::currprogress.c_str());
